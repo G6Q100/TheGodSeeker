@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     int speed = 10, maxGravity = -5;
 
-    [SerializeField] float gravity = 0, dashing = 0, attacking = 0, speedX , nSpeedX, speedZ, nSpeedZ;
+    [SerializeField] float gravity = 0, attacking = 0;
     [SerializeField]int jumpTime = 1;
 
     string mode = "normal";
