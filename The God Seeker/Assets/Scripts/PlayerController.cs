@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController characterController;
     Animator anim;
-    int speed = 12, maxGravity = -5;
+    int speed = 10, maxGravity = -5;
 
-    [SerializeField] float gravity = 0, dashing = 0, attacking = 0;
+    [SerializeField] float gravity = 0, dashing = 0, attacking = 0, speedX , nSpeedX, speedZ, nSpeedZ;
     [SerializeField]int jumpTime = 1;
+
+    string mode = "normal";
 
     Vector3 playerMovement, direction;
 
@@ -21,62 +23,29 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (attacking <= 0.2f)
-            Dash();
-        if (dashing <= 0.2f)
-            Attack();
-        Jump();
-        Movement();
-    }
-
-    void Dash()
-    {
-        if (dashing > 0.2f)
+        switch (mode)
         {
-            dashing -= Time.deltaTime;
-            maxGravity = -10;
-
-            characterController.height = 2;
-            characterController.center = Vector3.down;
-
-            playerMovement = transform.forward * 30 * Time.deltaTime;
-            characterController.Move(playerMovement);
-            return;
-        }
-
-        if (dashing > 0)
-        {
-            anim.SetBool("Dashing", false);
-            dashing -= Time.deltaTime;
-            maxGravity = -5;
-
-            characterController.center = Vector3.zero;
-            characterController.height = 4;
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && jumpTime > 0)
-        {
-            anim.SetBool("Dashing", true);
-            dashing = 0.5f;
-            return;
-        }
-
-
-        if (dashing <= 0)
-        {
-            dashing = 0;
+            case "normal":
+                Movement();
+                break;
+            case "attack":
+                Attack();
+                break;
+            case "jump":
+                Movement();
+                Jump();
+                break;
         }
     }
 
     void Attack()
     {
+        attacking -= Time.deltaTime;
         if (attacking > 0.5f)
         {
-            attacking -= Time.deltaTime;
             maxGravity = -10;
 
-            playerMovement = transform.forward * 30 * Time.deltaTime;
+            playerMovement = transform.forward * 10 * Time.deltaTime;
             characterController.Move(playerMovement);
             return;
         }
@@ -84,23 +53,14 @@ public class PlayerController : MonoBehaviour
         if (attacking > 0.2f)
         {
             //anim.SetBool("Dashing", false);
-            attacking -= Time.deltaTime;
             maxGravity = -5;
-
             return;
         }
-
-        if (Input.GetKeyDown(KeyCode.J) && jumpTime > 0)
-        {
-            //anim.SetBool("Dashing", true);
-            attacking = 0.6f;
-            return;
-        }
-
 
         if (attacking <= 0)
         {
             attacking = 0;
+            mode = "normal";
         }
     }
 
@@ -108,20 +68,12 @@ public class PlayerController : MonoBehaviour
     {
         gravity -= 15f * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space) &&
-            jumpTime == 1 && dashing <= 0.2f && attacking <= 0.2f)
-        {
-            jumpTime = 0;
-            speed = 5;
-            gravity = 10;
-            return;
-        }
-
         if (characterController.isGrounded)
         {
             jumpTime = 1;
             speed = 10;
             gravity = 0;
+            mode = "normal";
             return;
         }
 
@@ -133,17 +85,10 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        if(dashing <= 0.2f && attacking <= 0.2f)
-        {
-            float v = Input.GetAxis("Horizontal") * speed;
-            float h = Input.GetAxis("Vertical") * speed;
+        float v = Input.GetAxis("Horizontal") * speed;
+        float h = Input.GetAxis("Vertical") * speed;
 
-            playerMovement = new Vector3(v, gravity, h) * Time.deltaTime;
-        }
-        else
-        {
-            playerMovement = new Vector3(0, gravity, 0) * Time.deltaTime;
-        }
+        playerMovement = new Vector3(v, gravity, h) * Time.deltaTime;
 
         characterController.Move(playerMovement);
 
@@ -158,6 +103,22 @@ public class PlayerController : MonoBehaviour
         else
         {
             anim.SetBool("Running", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.J) && jumpTime > 0)
+        {
+            attacking = 0.6f;
+            mode = "attack";
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) &&
+            jumpTime == 1 && attacking <= 0)
+        {
+            jumpTime = 0;
+            speed = 5;
+            gravity = 10;
+            mode = "jump";
         }
     }
 }

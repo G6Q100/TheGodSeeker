@@ -5,14 +5,14 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    Vector3 pos;
 
-    void FixedUpdate()
+    Vector3 offset;
+
+    void LateUpdate()
     {
-        pos = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime);
+        Vector3 desiredPosition = player.transform.position + new Vector3(0, 10, -9);
+        Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, 0.2f);
 
-        pos = player.transform.position + new Vector3(0, 10, -9);
-
-        transform.position = pos;
+        transform.position = smoothPosition;
     }
 }
