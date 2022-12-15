@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 desiredPosition = player.transform.position + new Vector3(0, 10, -9);
+        Vector3 desiredPosition = player.transform.position + new Vector3(0, 50, -48);
         Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, 0.2f);
 
         transform.position = smoothPosition;

@@ -6,12 +6,8 @@ using UnityEngine.AI;
 public class Player2Controller : MonoBehaviour
 {
     public GameObject player1, popUp;
-    int speed = 20;
 
     NavMeshAgent agent;
-
-    [SerializeField] float gravity = 0;
-    Vector3 playerMovement;
 
     void Start()
     {
@@ -35,14 +31,15 @@ public class Player2Controller : MonoBehaviour
             }
         }
 
-        if(transform.position.x >= player1.transform.position.x + 18.5f ||
-            transform.position.x <= player1.transform.position.x - 18.5f || 
-            transform.position.z >= player1.transform.position.z + 14f ||
-            transform.position.z <= player1.transform.position.z - 14f)
+        if(transform.position.x >= player1.transform.position.x + 26.5f ||
+            transform.position.x <= player1.transform.position.x - 26.5f || 
+            transform.position.z >= player1.transform.position.z + 18.5f ||
+            transform.position.z <= player1.transform.position.z - 18.5f)
         {
             transform.position = player1.transform.position;
             popUp.transform.position = transform.position;
             popUp.SetActive(true);
+            agent.SetDestination(transform.position);
             popUp.GetComponent<ParticleSystem>().Play();
         }
     }

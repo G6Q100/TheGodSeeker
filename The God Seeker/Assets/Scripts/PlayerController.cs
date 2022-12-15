@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     Vector3 playerMovement, direction;
 
+    [SerializeField] ParticleSystem slowFalling;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -31,17 +33,13 @@ public class PlayerController : MonoBehaviour
             case "attack":
                 Attack();
                 break;
-            case "jump":
-                Movement();
-                Jump();
-                break;
         }
     }
 
     void Attack()
     {
         attacking -= Time.deltaTime;
-        if (attacking > 0.5f)
+        if (attacking > 0.3f)
         {
             maxGravity = -10;
 
@@ -50,7 +48,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (attacking > 0.2f)
+        if (attacking > 0.1f)
         {
             //anim.SetBool("Dashing", false);
             maxGravity = -5;
@@ -64,27 +62,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump()
+    void Movement()
     {
         gravity -= 15f * Time.deltaTime;
 
-        if (characterController.isGrounded)
-        {
-            jumpTime = 1;
-            speed = 10;
-            gravity = 0;
-            mode = "normal";
-            return;
-        }
-
-        if (gravity < maxGravity)
-        {
-            gravity = maxGravity;
-        }
-    }
-
-    void Movement()
-    {
         float v = Input.GetAxis("Horizontal") * speed;
         float h = Input.GetAxis("Vertical") * speed;
 
@@ -105,9 +86,28 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", false);
         }
 
+        // Jump
+        if (characterController.isGrounded)
+        {
+            gravity = 0;
+            jumpTime = 1;
+            speed = 10;
+
+            var emission = slowFalling.emission;
+            emission.rateOverTime = 0;
+        }
+        else
+        {
+            jumpTime = 0;
+            speed = 5;
+
+            var emission = slowFalling.emission;
+            emission.rateOverTime = 5;
+        }
+
         if (Input.GetKeyDown(KeyCode.J) && jumpTime > 0)
         {
-            attacking = 0.6f;
+            attacking = 0.4f;
             mode = "attack";
             return;
         }
@@ -115,10 +115,20 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) &&
             jumpTime == 1 && attacking <= 0)
         {
-            jumpTime = 0;
-            speed = 5;
             gravity = 10;
-            mode = "jump";
+        }
+
+        if (gravity < maxGravity)
+        {
+            gravity = maxGravity;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player2")
+        {
+            Physics.IgnoreCollision(characterController, collision.collider);
         }
     }
 }
