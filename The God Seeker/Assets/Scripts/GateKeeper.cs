@@ -15,7 +15,7 @@ public class GateKeeper : MonoBehaviour
 
     public Transform[] body;
 
-    float time;
+    float time, sinTime;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class GateKeeper : MonoBehaviour
             Movement();
         if (time < 0)
         {
-            time = 2;
+            time = 6;
         }
 
         BodyFollow();
@@ -40,14 +40,19 @@ public class GateKeeper : MonoBehaviour
 
     void Movement()
     {
-        transform.position += transform.forward * 1.5f;
-        transform.Rotate(Vector3.up * 6);
+        sinTime += Time.deltaTime * 1.5f;
+        if (sinTime >= 360)
+        {
+            sinTime = 0;
+        }
+        transform.position += transform.forward * 0.5f + transform.up * Mathf.Sin(sinTime) * 0.25f;
+        transform.Rotate(Vector3.up * 2);
 
     }
 
     void BodyCreate()
     {
-        segmentPoses[0] = targetDir.position + Vector3.left * 25;
+        segmentPoses[0] = targetDir.position;
 
         for (int i = 1; i < segmentPoses.Length; i++)
         {

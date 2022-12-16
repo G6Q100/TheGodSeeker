@@ -15,11 +15,11 @@ E:/Users/Tai/Documents/GitHub/TheGodSeeker/The God Seeker
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-54793
+63228
 Successfully changed project path to: E:/Users/Tai/Documents/GitHub/TheGodSeeker/The God Seeker
 E:/Users/Tai/Documents/GitHub/TheGodSeeker/The God Seeker
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 1004.65 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 98.64 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.15f1 (e767a7370072)
 [Subsystems] Discovering subsystems at path E:/Unity/UnityFile/2021.1.15f1/Editor/Data/Resources/UnitySubsystems
@@ -37,5 +37,5 @@ Initialize mono
 Mono path[0] = 'E:/Unity/UnityFile/2021.1.15f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/UnityFile/2021.1.15f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'E:/Unity/UnityFile/2021.1.15f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56780
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56576
 Begin MonoManager ReloadAssembly

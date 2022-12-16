@@ -6,8 +6,6 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
 
-    Vector3 offset;
-
     void LateUpdate()
     {
         Vector3 desiredPosition = player.transform.position + new Vector3(0, 50, -48);
