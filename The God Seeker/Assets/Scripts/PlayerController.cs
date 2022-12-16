@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", false);
         }
 
+        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z, -16, 100));
+
         // Jump
         if (characterController.isGrounded)
         {
@@ -122,6 +124,14 @@ public class PlayerController : MonoBehaviour
         {
             gravity = maxGravity;
         }
+    }
+
+    [HideInInspector]
+    public void Teleported(Vector3 pos)
+    {
+        characterController.enabled = false;
+        transform.position = pos;
+        characterController.enabled = true;
     }
 
     private void OnCollisionEnter(Collision collision)

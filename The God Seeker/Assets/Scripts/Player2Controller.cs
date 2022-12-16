@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour
 {
-    public GameObject player1, popUp;
+    public GameObject player1, popUp, popUp2;
 
     NavMeshAgent agent;
+
+    float teleportCD;
+
+    public Slider teleportSlider;
 
     void Start()
     {
@@ -17,6 +22,7 @@ public class Player2Controller : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+        Teleport();
     }
 
     void Movement()
@@ -25,14 +31,18 @@ public class Player2Controller : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                agent.SetDestination(hit.point);
+                if (hit.point.z <= -17)
+                    agent.SetDestination(new Vector3(hit.point.x, hit.point.y, -16));
+                else
+                    agent.SetDestination(hit.point);
             }
         }
 
-        if(transform.position.x >= player1.transform.position.x + 26.5f ||
-            transform.position.x <= player1.transform.position.x - 26.5f || 
+        if (transform.position.x >= player1.transform.position.x + 26.5f ||
+            transform.position.x <= player1.transform.position.x - 26.5f ||
             transform.position.z >= player1.transform.position.z + 18.5f ||
             transform.position.z <= player1.transform.position.z - 18.5f)
         {
@@ -41,6 +51,35 @@ public class Player2Controller : MonoBehaviour
             popUp.SetActive(true);
             agent.SetDestination(transform.position);
             popUp.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
+    void Teleport()
+    {
+        if (teleportCD < 3)
+            teleportCD += Time.deltaTime;
+
+        teleportSlider.value = Mathf.Clamp(teleportCD, 0, 3);
+
+        if (Input.GetKeyDown(KeyCode.Keypad1) && teleportCD >= 3)
+        {
+            Vector3 playerPos = player1.transform.position;
+
+            Vector3 teleportedPos = new Vector3(transform.position.x, player1.transform.position.y, transform.position.z);
+
+            player1.GetComponent<PlayerController>().Teleported(teleportedPos);
+            transform.position = new Vector3(playerPos.x, transform.position.y, playerPos.z);
+
+            popUp.transform.position = transform.position;
+            popUp.SetActive(true);
+            agent.SetDestination(transform.position);
+            popUp.GetComponent<ParticleSystem>().Play();
+
+            popUp2.transform.position = playerPos;
+            popUp2.SetActive(true);
+            popUp2.GetComponent<ParticleSystem>().Play();
+
+            teleportCD = 0;
         }
     }
 }

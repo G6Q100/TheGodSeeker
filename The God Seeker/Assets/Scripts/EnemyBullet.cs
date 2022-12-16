@@ -16,16 +16,13 @@ public class EnemyBullet : MonoBehaviour
         existTime -= Time.deltaTime;
         rb.velocity = (transform.rotation * Vector3.forward * speed);
 
+
         if (GetComponent<ParticleSystem>().isStopped || existTime <= 0)
             Destroy(gameObject, 2f);
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player2")
-        {
-            Physics.IgnoreCollision(GetComponent<SphereCollider>(), collision.collider);
-        }
-        else
+        if (collision.gameObject.tag != "Player2")
         {
             Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 1);
             GetComponent<ParticleSystem>().Stop();

@@ -34,6 +34,7 @@ public class Drone : MonoBehaviour
 
         Vector3 playerPos = new Vector3(player.position.x, 1, player.position.z);
         agent.SetDestination(playerPos);
+
         transform.LookAt(playerPos);
 
         currentPos = transform.rotation;
