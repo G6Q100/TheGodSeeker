@@ -34,7 +34,7 @@ public class Player2Controller : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (hit.point.z <= -17)
+                if (hit.point.z <= -16)
                     agent.SetDestination(new Vector3(hit.point.x, hit.point.y, -16));
                 else
                     agent.SetDestination(hit.point);
@@ -43,7 +43,7 @@ public class Player2Controller : MonoBehaviour
 
         if (transform.position.x >= player1.transform.position.x + 26.5f ||
             transform.position.x <= player1.transform.position.x - 26.5f ||
-            transform.position.z >= player1.transform.position.z + 18.5f ||
+            transform.position.z >= player1.transform.position.z + 22.5f ||
             transform.position.z <= player1.transform.position.z - 18.5f)
         {
             transform.position = player1.transform.position;
@@ -65,10 +65,10 @@ public class Player2Controller : MonoBehaviour
         {
             Vector3 playerPos = player1.transform.position;
 
-            Vector3 teleportedPos = new Vector3(transform.position.x, player1.transform.position.y, transform.position.z);
+            Vector3 teleportedPos = transform.position;
 
             player1.GetComponent<PlayerController>().Teleported(teleportedPos);
-            transform.position = new Vector3(playerPos.x, transform.position.y, playerPos.z);
+            transform.position = playerPos;
 
             popUp.transform.position = transform.position;
             popUp.SetActive(true);

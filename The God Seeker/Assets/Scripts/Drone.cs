@@ -21,10 +21,10 @@ public class Drone : MonoBehaviour
 
     void Update()
     {
-        if (agent.velocity.magnitude <= 0.15f)
+        if (agent.velocity.magnitude <= 0.5f)
             Attack();
         else
-            bulletCD = 1;
+            bulletCD = 1.5f;
         Movement();
     }
 

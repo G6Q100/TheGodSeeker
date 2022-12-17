@@ -20,12 +20,14 @@ public class EnemyBullet : MonoBehaviour
         if (GetComponent<ParticleSystem>().isStopped || existTime <= 0)
             Destroy(gameObject, 2f);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag != "Player2")
-        {
-            Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 1);
-            GetComponent<ParticleSystem>().Stop();
-        }
+        if (other.gameObject.tag == "Player2")
+            return;
+        if (other.gameObject.tag == "Enemy")
+            return;
+
+        Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 1);
+        GetComponent<ParticleSystem>().Stop();
     }
 }

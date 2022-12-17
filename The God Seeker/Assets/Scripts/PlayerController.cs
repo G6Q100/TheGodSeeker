@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] ParticleSystem slowFalling;
 
+    [SerializeField] Transform attackRange;
+    [SerializeField] GameObject sword;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -42,7 +45,6 @@ public class PlayerController : MonoBehaviour
         if (attacking > 0.3f)
         {
             maxGravity = -10;
-
             playerMovement = transform.forward * 10 * Time.deltaTime;
             characterController.Move(playerMovement);
             return;
@@ -50,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
         if (attacking > 0.1f)
         {
-            //anim.SetBool("Dashing", false);
             maxGravity = -5;
             return;
         }
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J) && jumpTime > 0)
         {
             attacking = 0.4f;
+            Destroy(Instantiate(sword, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
             mode = "attack";
             return;
         }
