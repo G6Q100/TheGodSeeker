@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7889937203204445656
+--- !u!1 &5024967489570048447
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,64 +8,65 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7889937203204445657}
-  - component: {fileID: 1272514628121404932}
-  - component: {fileID: 2491683268798495835}
-  - component: {fileID: 8433299802008471427}
+  - component: {fileID: 7904557312443263218}
+  - component: {fileID: 2392326026662932434}
+  - component: {fileID: 8442237015576636169}
+  - component: {fileID: 4607458209658424199}
   m_Layer: 0
-  m_Name: SwordAttack
-  m_TagString: Sword
+  m_Name: DashArea
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7889937203204445657
+--- !u!4 &7904557312443263218
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889937203204445656}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_GameObject: {fileID: 5024967489570048447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: -6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1272514628121404932
+--- !u!114 &2392326026662932434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889937203204445656}
+  m_GameObject: {fileID: 5024967489570048447}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db810632d2d963642b0af0c636ab6a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
---- !u!135 &2491683268798495835
-SphereCollider:
+  damage: 1
+--- !u!136 &8442237015576636169
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889937203204445656}
+  m_GameObject: {fileID: 5024967489570048447}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 1.2
+  m_Height: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8433299802008471427
+--- !u!54 &4607458209658424199
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889937203204445656}
+  m_GameObject: {fileID: 5024967489570048447}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

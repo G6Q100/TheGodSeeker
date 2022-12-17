@@ -10,9 +10,12 @@ public class Player2Controller : MonoBehaviour
 
     NavMeshAgent agent;
 
-    float teleportCD;
+    float teleportCD, dashCD;
 
     public Slider teleportSlider;
+
+    [SerializeField] Transform attackRange;
+    [SerializeField] GameObject dashArea;
 
     void Start()
     {
@@ -22,6 +25,7 @@ public class Player2Controller : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+        Dash();
         Teleport();
     }
 
@@ -80,6 +84,30 @@ public class Player2Controller : MonoBehaviour
             popUp2.GetComponent<ParticleSystem>().Play();
 
             teleportCD = 0;
+        }
+    }
+
+    void Dash()
+    {
+        if (Input.GetMouseButtonDown(1) && dashCD <= 0)
+        {
+            dashCD = 0.5f;
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                transform.LookAt(hit.point);
+                transform.position += transform.forward * 5;
+                Destroy(Instantiate(dashArea, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
+                agent.SetDestination(transform.position);
+            }
+        }
+
+        if(dashCD > 0)
+        {
+            dashCD -= Time.deltaTime;
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HP : MonoBehaviour
 {
@@ -71,9 +72,19 @@ public class HP : MonoBehaviour
                 damageTime = 0.1f;
                 if (healthPoint <= 0)
                 {
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<PlayerController>().enabled = false;
+                    player.SetActive(false);
+                    StartCoroutine(Restart());
                 }
                 break;
         }
+
+        IEnumerator Restart()
+        {
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("Level1");
+        }
     }
+
+
 }

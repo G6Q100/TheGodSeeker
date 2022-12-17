@@ -24,7 +24,7 @@ public class Drone : MonoBehaviour
         if (agent.velocity.magnitude <= 0.5f)
             Attack();
         else
-            bulletCD = 1.5f;
+            bulletCD = 0.5f;
         Movement();
     }
 
