@@ -67,7 +67,7 @@ public class Player2Controller : MonoBehaviour
 
             Vector3 teleportedPos = transform.position;
 
-            player1.GetComponent<PlayerController>().Teleported(teleportedPos);
+            player1.GetComponent<PlayerController>().Teleported(teleportedPos + Vector3.up);
             transform.position = playerPos;
 
             popUp.transform.position = transform.position;

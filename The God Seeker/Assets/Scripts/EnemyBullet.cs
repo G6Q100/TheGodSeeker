@@ -26,6 +26,10 @@ public class EnemyBullet : MonoBehaviour
             return;
         if (other.gameObject.tag == "Enemy")
             return;
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<HP>().Damaged(1);
+        }
 
         Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 1);
         GetComponent<ParticleSystem>().Stop();

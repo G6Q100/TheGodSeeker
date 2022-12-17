@@ -15,7 +15,7 @@ public class Sword : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<HP>().Damaged(3);
             Destroy(gameObject);
         }
     }
