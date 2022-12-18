@@ -20,22 +20,25 @@ public class SpiderController : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        if (Vector3.Distance(transform.position, player.position) >= 30)
+            return;
         if (agent.velocity.magnitude <= 0.1f)
-            Attack();
-        else
-        {
-            attackCD = 2f;
-            preFire.gameObject.SetActive(false);
-            fire.gameObject.SetActive(false);
-            attackRange.SetActive(false);
-        }
-        if(attackCD > 1.5f)
-            Movement();
+                Attack();
+            else
+            {
+                attackCD = 2f;
+                preFire.gameObject.SetActive(false);
+                fire.gameObject.SetActive(false);
+                attackRange.SetActive(false);
+            }
+            if (attackCD > 1.5f)
+                Movement();
     }
 
     void Movement()

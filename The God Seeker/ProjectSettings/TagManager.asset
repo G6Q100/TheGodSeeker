@@ -8,6 +8,7 @@ TagManager:
   - Sword
   - EnemyBullet
   - Player2
+  - Environment
   layers:
   - Default
   - TransparentFX

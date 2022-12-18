@@ -16,16 +16,19 @@ public class Drone : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        if (Vector3.Distance(transform.position, player.position) >= 30)
+            return;
         if (agent.velocity.magnitude <= 0.5f)
-            Attack();
-        else
-            bulletCD = 0.5f;
-        Movement();
+                Attack();
+            else
+                bulletCD = 0.5f;
+            Movement();
     }
 
     void Movement()

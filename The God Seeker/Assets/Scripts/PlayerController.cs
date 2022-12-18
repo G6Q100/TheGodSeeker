@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     string mode = "normal";
 
-    Vector3 playerMovement, direction;
+    Vector3 playerMovement, direction, lastStand;
 
     [SerializeField] ParticleSystem slowFalling;
 
@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
             case "attack":
                 Attack();
                 break;
+        }
+        if(transform.position.y <= -5)
+        {
+            transform.position = lastStand;
+            GetComponent<HP>().Damaged(2, 0);
         }
     }
 
@@ -87,7 +92,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", false);
         }
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z, -16, 100));
+        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z, -16, 160));
 
         // Jump
         if (characterController.isGrounded)
@@ -101,6 +106,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if(jumpTime > 0)
+            {
+                lastStand = transform.position;
+            }
             jumpTime = 0;
             speed = 5;
 

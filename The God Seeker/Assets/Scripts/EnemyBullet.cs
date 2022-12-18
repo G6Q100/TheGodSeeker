@@ -18,7 +18,7 @@ public class EnemyBullet : MonoBehaviour
 
 
         if (GetComponent<ParticleSystem>().isStopped || existTime <= 0)
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 1f);
     }
     private void OnTriggerEnter(Collider other)
     {

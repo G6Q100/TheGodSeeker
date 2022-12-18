@@ -14,6 +14,8 @@ public class Player2Controller : MonoBehaviour
 
     public Slider teleportSlider;
 
+    Vector3 lastStand;
+
     [SerializeField] Transform attackRange;
     [SerializeField] GameObject dashArea;
 
@@ -33,6 +35,8 @@ public class Player2Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            lastStand = transform.position;
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -67,6 +71,8 @@ public class Player2Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Keypad1) && teleportCD >= 3)
         {
+            lastStand = transform.position;
+
             Vector3 playerPos = player1.transform.position;
 
             Vector3 teleportedPos = transform.position;
@@ -98,9 +104,11 @@ public class Player2Controller : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
+                agent.enabled = false;
                 transform.LookAt(hit.point);
                 transform.position += transform.forward * 5;
                 Destroy(Instantiate(dashArea, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
+                agent.enabled = true;
                 agent.SetDestination(transform.position);
             }
         }
@@ -108,6 +116,15 @@ public class Player2Controller : MonoBehaviour
         if(dashCD > 0)
         {
             dashCD -= Time.deltaTime;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Environment")
+        {
+            gameObject.transform.position = lastStand;
+            agent.SetDestination(transform.position);
         }
     }
 }
