@@ -15,7 +15,11 @@ public class HP : MonoBehaviour
     GameObject normal, damaged, enemyHitEffect;
 
     [SerializeField]
-    GameObject player;
+    SkinnedMeshRenderer player;
+
+    [SerializeField]
+    SkinnedMeshRenderer[] bodyPart;
+
     [SerializeField]
     Material normalM, damagedM;
     [SerializeField]
@@ -42,24 +46,41 @@ public class HP : MonoBehaviour
                 if (damageTime > 0)
                 {
                     damageTime -= Time.deltaTime;
-                    player.GetComponent<SkinnedMeshRenderer>().material = damagedM;
+                    player.material = damagedM;
                 }
                 else
                 {
-                    player.GetComponent<SkinnedMeshRenderer>().material = normalM;
+                    player.material = normalM;
+                }
+                break;
+            case 3:
+                if (damageTime > 0)
+                {
+                    damageTime -= Time.deltaTime;
+                    foreach (SkinnedMeshRenderer skin in bodyPart)
+                    {
+                        skin.material = damagedM;
+                    }
+                }
+                else
+                {
+                    foreach (SkinnedMeshRenderer skin in bodyPart)
+                    {
+                        skin.material = normalM;
+                    }
                 }
                 break;
         }
     }
 
-    public void Damaged(int hp)
+    public void Damaged(int hp, int knockback)
     {
         switch (hpMode)
         {
             case 1:
                 healthPoint -= hp;
                 damageTime = 0.1f;
-                transform.position -= transform.forward;
+                transform.position -= transform.forward * knockback;
                 if (healthPoint <= 0)
                 {
                     Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
@@ -73,8 +94,18 @@ public class HP : MonoBehaviour
                 if (healthPoint <= 0)
                 {
                     gameObject.GetComponent<PlayerController>().enabled = false;
-                    player.SetActive(false);
+                    player.gameObject.SetActive(false);
                     StartCoroutine(Restart());
+                }
+                break;
+            case 3:
+                healthPoint -= hp;
+                damageTime = 0.1f;
+                transform.position -= transform.forward * knockback;
+                if (healthPoint <= 0)
+                {
+                    Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
+                    Destroy(gameObject);
                 }
                 break;
         }

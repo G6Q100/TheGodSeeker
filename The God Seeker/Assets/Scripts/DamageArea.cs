@@ -5,13 +5,13 @@ using UnityEngine;
 public class DamageArea : MonoBehaviour
 {
     [SerializeField]
-    int damage;
+    int damage, knockback;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<HP>().Damaged(damage);
+            other.gameObject.GetComponent<HP>().Damaged(damage, knockback);
             Destroy(gameObject);
         }
     }
