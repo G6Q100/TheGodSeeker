@@ -5,14 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour
 {
-    [SerializeField]
-    string nextLevel;
+    public Animator trasition;
+
+    public float trasitionTime = 1f;
+
+    //[SerializeField]
+    //string nextLevel;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            SceneManager.LoadScene(nextLevel);
+            //SceneManager.LoadScene(nextLevel);
+            LoadNext();
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void LoadNext()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        trasition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(trasitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+
     }
 }
