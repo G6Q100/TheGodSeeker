@@ -97,7 +97,7 @@ public class Player2Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && dashCD <= 0)
         {
-            dashCD = 0.5f;
+            dashCD = 0.3f;
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -106,7 +106,7 @@ public class Player2Controller : MonoBehaviour
             {
                 agent.enabled = false;
                 transform.LookAt(hit.point);
-                transform.position += transform.forward * 5;
+                transform.position += transform.forward * 6;
                 Destroy(Instantiate(dashArea, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
                 agent.enabled = true;
                 agent.SetDestination(transform.position);

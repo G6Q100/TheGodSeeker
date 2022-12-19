@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShockWave : MonoBehaviour
+public class LighningBall : MonoBehaviour
 {
-    float alpha;
+    public float speed;
+    private float existTime = 50;
+
+    public Rigidbody rb;
+
+    public GameObject bulletHitEffect;
+
     private void FixedUpdate()
     {
-        gameObject.transform.localScale += Vector3.one * 15f * Time.deltaTime;
-        alpha += Time.deltaTime;
+        existTime -= Time.deltaTime;
+        rb.velocity = (transform.rotation * Vector3.forward * speed);
+
+
+        if (GetComponent<ParticleSystem>().isStopped || existTime <= 0)
+            Destroy(gameObject, 1f);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -22,5 +32,8 @@ public class ShockWave : MonoBehaviour
         {
             other.gameObject.GetComponent<HP>().Damaged(1, 0);
         }
+
+        Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 0.5f);
+        Destroy(gameObject);
     }
 }

@@ -50,13 +50,14 @@ public class HP : MonoBehaviour
                     damageTime -= Time.deltaTime;
                     player.material = damagedM;
                 }
-                if (iFrame > 0)
-                {
-                    iFrame -= Time.deltaTime;
-                }
                 else
                 {
                     player.material = normalM;
+                }
+
+                if (iFrame > 0)
+                {
+                    iFrame -= Time.deltaTime;
                 }
                 break;
             case 3:

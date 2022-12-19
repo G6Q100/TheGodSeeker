@@ -37,7 +37,7 @@ public class GateKeeper : MonoBehaviour
     [SerializeField] GameObject rightArm, leftArm;
 
     int fire;
-    [SerializeField] GameObject energyBall;
+    [SerializeField] GameObject energyBall, centerPoint;
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class GateKeeper : MonoBehaviour
         segmentPoses = new Vector3[length];
         segmentV = new Vector3[length];
 
-        changeTime = Random.Range(-2f, 2f);
+        changeTime = -6;
 
         BodyCreate();
     }
@@ -72,6 +72,15 @@ public class GateKeeper : MonoBehaviour
             case 2:
                 FireAttack();
                 break;
+            case 3:
+                ClawAttack();
+                break;
+            case 4:
+                ComboAttack();
+                break;
+            case 5:
+                ThunderBlastAttack();
+                break;
         }
     }
 
@@ -88,7 +97,7 @@ public class GateKeeper : MonoBehaviour
         {
             mode = lastMode;
             attackSpace = 0;
-            if (mode < 2)
+            if (mode < 5)
                 mode++;
             else
                 mode = 1;
@@ -96,6 +105,9 @@ public class GateKeeper : MonoBehaviour
 
             if (mode == 2)
                 savePos = transform.position - transform.forward * 12;
+
+            if (mode == 4)
+                savePos = transform.position - transform.forward * 15;
         }
     }
 
@@ -106,7 +118,7 @@ public class GateKeeper : MonoBehaviour
         leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos, 
             smoothSpeed * 3);
 
-        if (Vector3.Distance(transform.position, player.position) > 12)
+        if (Vector3.Distance(transform.position, player.position) > 11)
         {
             if (circling == 0)
             {
@@ -114,13 +126,14 @@ public class GateKeeper : MonoBehaviour
                 CircleRadius = Vector3.Distance(transform.position, player.position);
                 RotationSpeed = 1f;
             }
-            CircleRadius -= Time.deltaTime / 2;
+            CircleRadius -= Time.deltaTime * 10;
         }
-        else if (Vector3.Distance(transform.position, player.position) > 9)
+        else if (Vector3.Distance(transform.position, player.position) > 8)
         {
-            CircleRadius -= Time.deltaTime / 2;
+            CircleRadius -= Time.deltaTime * 10;
         }
-        CircleMove();
+        CircleMove(player.position);
+        transform.LookAt(player.position + Vector3.up * 3);
         if (circling == 1)
         {
             circling = 0;
@@ -240,17 +253,19 @@ public class GateKeeper : MonoBehaviour
             if (fire == 0)
             {
                 fire = 1;
+                transform.LookAt(player.position + Vector3.up);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
             }
             return;
         }
+
         if (attackSpace < 1.35f)
         {
             fire = 0;
             circling = 1;
             CircleRadius = 15;
             RotationSpeed = 5;
-            CircleMove();
+            CircleMove(player.position);
             return;
         }
 
@@ -259,8 +274,8 @@ public class GateKeeper : MonoBehaviour
             if(fire == 0 && attackSpace > 1.85f)
             {
                 fire = 1;
+                transform.LookAt(player.position + Vector3.up);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
-                Debug.Log("Fire");
             }
             return;
         }
@@ -271,7 +286,7 @@ public class GateKeeper : MonoBehaviour
             circling = 1;
             CircleRadius = 15;
             RotationSpeed = 5;
-            CircleMove();
+            CircleMove(player.position);
             return;
         }
 
@@ -280,6 +295,7 @@ public class GateKeeper : MonoBehaviour
             if(fire == 0 && attackSpace > 3.6f)
             {
                 fire = 1;
+                transform.LookAt(player.position + Vector3.up);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
             }
             return;
@@ -289,8 +305,173 @@ public class GateKeeper : MonoBehaviour
         changeTime = Random.Range(-2f, 2f);
     }
 
+    void ComboAttack()
+    {
+        attackSpace += Time.deltaTime;
 
-    void CircleMove()
+        transform.LookAt(player.position + Vector3.up * 3);
+        if (attackSpace < 0.6f)
+        {
+            fire = 0;
+
+            saveRot = transform.rotation;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 0.8f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        if (attackSpace < 1.35f)
+        {
+            fire = 0;
+            circling = 1;
+            CircleRadius = 18;
+            RotationSpeed = 5;
+            CircleMove(player.position);
+            return;
+        }
+
+        if (attackSpace < 2f)
+        {
+            if (fire == 0 && attackSpace > 1.85f)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        fire = 0;
+
+        if (attackSpace < 2.3f)
+        {
+            transform.rotation = saveRot;
+            savePos = player.position - transform.forward * 12 - transform.right * 12 + transform.up * 3;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 2.6f)
+        {
+            transform.rotation = saveRot;
+            savePos = player.position - transform.forward * 10 + transform.right * 12 + transform.up * 3;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 2.9f)
+        {
+            playerPos = player.transform.position + transform.up * 1;
+        }
+
+        if (attackSpace < 3.2f)
+        {
+            transform.rotation = saveRot;
+            savePos = player.position - transform.forward * 8 - transform.right * 12 + transform.up * 5;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            leftArmPos = new Vector3(0.05f, -leftArmPos.y, -leftArmPos.z);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+            smoothSpeed * 3);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+                smoothSpeed * 3);
+
+            savePos = player.position - transform.forward * 6.5f + transform.right * 3 + transform.up * 3;
+            return;
+        }
+
+        if (attackSpace < 4.4f)
+        {
+            transform.rotation = saveRot;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+            transform.LookAt(player.position + Vector3.up * 3);
+            leftArm.GetComponent<Rigidbody>().detectCollisions = true;
+
+            leftArm.transform.position = Vector3.Lerp(leftArm.transform.position, playerPos,
+                smoothSpeed * 10);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        leftArmPos = DefaultLeftArmPos;
+        leftArm.GetComponent<Rigidbody>().detectCollisions = false;
+        changeTime = Random.Range(-2f, 2f);
+    }
+
+    void ThunderBlastAttack()
+    {
+        attackSpace += Time.deltaTime;
+
+        if (attackSpace < 3f)
+        {
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 3);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (circling == 0)
+            {
+                circling = 1;
+                CircleRadius = 15;
+                RotationSpeed = 5f;
+                ElevationOffset = 5;
+            }
+            CircleMove(centerPoint.transform.position);
+            return;
+        }
+        if (attackSpace < 9f)
+        {
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 30);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (circling == 0)
+            {
+                circling = 1;
+                CircleRadius = 65;
+                RotationSpeed = 1f;
+                ElevationOffset = 45;
+            }
+            CircleMove(centerPoint.transform.position + Vector3.up * 30);
+            return;
+        }
+
+        changeTime = Random.Range(-2f, 2f);
+    }
+
+    void CircleMove(Vector3 target)
     {
         positionOffset.Set(
          Mathf.Cos(angle) * CircleRadius,
@@ -304,15 +485,15 @@ public class GateKeeper : MonoBehaviour
             {
                 idleTime = 0;
             }
-            CircleRadius = 8f + Mathf.Sin(idleTime / 2) * 1f;
-            ElevationOffset = 5.5f + Mathf.Sin(idleTime / 2) * 1.5f;
-            RotationSpeed = 1 + Mathf.Sin(idleTime / 2) * 0.2f;
+            CircleRadius = 6f + Mathf.Sin(idleTime * 1.2f) * 1f;
+            ElevationOffset = 6f + Mathf.Sin(idleTime * 1.2f) * 2f;
+            RotationSpeed = 1 + Mathf.Sin(idleTime * 1.2f) * 0.3f;
         }
 
-        transform.position = Vector3.Lerp(transform.position, player.position + positionOffset, smoothSpeed * 3);
+        transform.position = Vector3.Lerp(transform.position, target + positionOffset, smoothSpeed * 3);
         angle += Time.deltaTime * RotationSpeed;
-        transform.LookAt(player.position + Vector3.up * 3);
     }
+
 
     void BodyCreate()
     {
@@ -339,7 +520,7 @@ public class GateKeeper : MonoBehaviour
         for (int i = 1; i < segmentPoses.Length; i++)
         {
             Vector3 targetPos = segmentPoses[i - 1] + (segmentPoses[i] - segmentPoses[i - 1]).normalized * 
-                (targetDist - i * 0.05f) - targetDir.forward * targetDist * 0.6f;
+                (targetDist - i * 0.035f) - targetDir.forward * targetDist * 0.6f;
 
             segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], targetPos, ref segmentV[i], smoothSpeed);
             body[i - 1].transform.position = segmentPoses[i];
