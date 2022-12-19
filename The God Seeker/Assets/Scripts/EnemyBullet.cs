@@ -26,12 +26,14 @@ public class EnemyBullet : MonoBehaviour
             return;
         if (other.gameObject.tag == "Enemy")
             return;
+        if (other.gameObject.tag == "Segment")
+            return;
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<HP>().Damaged(1, 0);
         }
 
-        Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 1);
+        Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 0.5f);
         GetComponent<ParticleSystem>().Stop();
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - Player2
   - Environment
+  - Segment
   layers:
   - Default
   - TransparentFX

@@ -8,9 +8,18 @@ public class SegmentRotation : MonoBehaviour
 
     public Vector3 direction;
     public Transform target;
+    [SerializeField] HP bossHp;
+    Quaternion lookAt;
 
     void Update()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, speed * Time.deltaTime);
+        lookAt = target.rotation * Quaternion.Euler(direction);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookAt, speed * Time.deltaTime);
+    }
+
+    public void GetHit(int damage, int knockback)
+    {
+        bossHp.Damaged(damage, knockback);
     }
 }

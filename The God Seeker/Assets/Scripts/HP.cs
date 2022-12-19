@@ -9,16 +9,18 @@ public class HP : MonoBehaviour
     [SerializeField]
     int healthPoint, hpMode;
 
-    float damageTime;
+    float damageTime, iFrame;
 
     [SerializeField]
-    GameObject normal, damaged, enemyHitEffect, tutorial, tutorial2;
+    GameObject normal, damaged, enemyHitEffect, tutorial, tutorial2, boss;
 
     [SerializeField]
     SkinnedMeshRenderer player;
 
     [SerializeField]
     SkinnedMeshRenderer[] bodyPart;
+    [SerializeField]
+    MeshRenderer[] modelPart;
 
     [SerializeField]
     Material normalM, damagedM;
@@ -47,6 +49,10 @@ public class HP : MonoBehaviour
                 {
                     damageTime -= Time.deltaTime;
                     player.material = damagedM;
+                }
+                if (iFrame > 0)
+                {
+                    iFrame -= Time.deltaTime;
                 }
                 else
                 {
@@ -87,6 +93,23 @@ public class HP : MonoBehaviour
                     }
                 }
                 break;
+            case 5:
+                if (damageTime > 0)
+                {
+                    damageTime -= Time.deltaTime;
+                    foreach (MeshRenderer skin in modelPart)
+                    {
+                        skin.material = damagedM;
+                    }
+                }
+                else
+                {
+                    foreach (MeshRenderer skin in modelPart)
+                    {
+                        skin.material = normalM;
+                    }
+                }
+                break;
         }
     }
 
@@ -105,14 +128,19 @@ public class HP : MonoBehaviour
                 }
                 break;
             case 2:
-                healthPoint -= hp;
-                hpBar.value = Mathf.Clamp(healthPoint, 0, 20);
-                damageTime = 0.1f;
-                if (healthPoint <= 0)
+                if (iFrame <= 0)
                 {
-                    gameObject.GetComponent<PlayerController>().enabled = false;
-                    player.gameObject.SetActive(false);
-                    StartCoroutine(Restart());
+                    iFrame = 0.5f;
+                    healthPoint -= hp;
+                    hpBar.value = Mathf.Clamp(healthPoint, 0, 20);
+                    damageTime = 0.1f;
+                    if (healthPoint <= 0)
+                    {
+                        gameObject.GetComponent<PlayerController>().enabled = false;
+                        gameObject.GetComponent<Animator>().enabled = false;
+                        gameObject.GetComponent<Ragdoll>().ActivateRagdoll();
+                        StartCoroutine(Restart());
+                    }
                 }
                 break;
             case 3:
@@ -135,6 +163,16 @@ public class HP : MonoBehaviour
                     tutorial.SetActive(true);
                     tutorial2.SetActive(true);
                     Destroy(gameObject);
+                }
+                break;
+            case 5:
+                healthPoint -= hp;
+                hpBar.value = Mathf.Clamp(healthPoint, 0, 210);
+                damageTime = 0.1f;
+                if (healthPoint <= 0)
+                {
+                    Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
+                    Destroy(boss);
                 }
                 break;
         }

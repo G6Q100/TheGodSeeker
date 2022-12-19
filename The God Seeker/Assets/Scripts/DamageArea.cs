@@ -13,6 +13,12 @@ public class DamageArea : MonoBehaviour
         {
             other.gameObject.GetComponent<HP>().Damaged(damage, knockback);
             Destroy(gameObject);
+            return;
+        }
+        if (other.gameObject.tag == "Segment")
+        {
+            other.gameObject.GetComponent<SegmentRotation>().GetHit(damage, 0);
+            Destroy(gameObject);
         }
     }
 }
