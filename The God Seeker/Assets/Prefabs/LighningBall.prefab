@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5291271122680796713}
-  - component: {fileID: 2274620195591893375}
+  - component: {fileID: 6802183749056205930}
   - component: {fileID: 5685784768103796284}
   - component: {fileID: 4452497138489219871}
   - component: {fileID: 5365582428595341511}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2274620195591893375
+--- !u!114 &6802183749056205930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,12 +45,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 392676193674323970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a12364a13afef4c8bb3fe00ddd7dbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6eabb8fa1a4db504988b7e99a35f2326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
   rb: {fileID: 6023013250055116726}
-  bulletHitEffect: {fileID: 2361281079963200934, guid: ecd51da42c488994388ef16dc87f2162, type: 3}
+  bulletHitEffect: {fileID: 8750262048380012054, guid: 8d3d4f62a3f562349a956efdae9ddd1d, type: 3}
 --- !u!135 &5685784768103796284
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5037,8 +5037,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.05
-      minScalar: 0.03
+      scalar: 0.025
+      minScalar: 0.02
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5090,7 +5090,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: -100
+      scalar: -90
       minScalar: -80
       maxCurve:
         serializedVersion: 2
@@ -5206,8 +5206,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
-      minScalar: 0.2
+      scalar: 0.08
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5788,7 +5788,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2
