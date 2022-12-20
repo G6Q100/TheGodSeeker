@@ -105981,7 +105981,7 @@ MonoBehaviour:
   centerPoint: {fileID: 1872231190}
   thunderBall: {fileID: 98628515728523319, guid: 94b9c3180cf47874cbb016d44512e845, type: 3}
   thunderShock: {fileID: 5678222220868666203}
-  lightning: {fileID: 5722781613563283806, guid: b5f028431aaa8534db4b1d52ecc08e30, type: 3}
+  lightning: {fileID: 5722781613563283806, guid: 8d5915648f3281f4abbd4f500530d377, type: 3}
   lightningDrop: {fileID: 986191297}
   music: {fileID: 880159879}
   bg2: {fileID: 8300000, guid: 24c95fd27dc332d4e8e90f216dfaf533, type: 3}
