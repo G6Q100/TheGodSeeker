@@ -64,12 +64,12 @@ public class Player2Controller : MonoBehaviour
 
     void Teleport()
     {
-        if (teleportCD < 3)
+        if (teleportCD < 2)
             teleportCD += Time.deltaTime;
 
-        teleportSlider.value = Mathf.Clamp(teleportCD, 0, 3);
+        teleportSlider.value = Mathf.Clamp(teleportCD, 0, 2);
 
-        if (Input.GetKeyDown(KeyCode.Keypad1) && teleportCD >= 3)
+        if (Input.GetKeyDown(KeyCode.Keypad1) && teleportCD >= 2)
         {
             lastStand = transform.position;
 

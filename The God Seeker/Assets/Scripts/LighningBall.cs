@@ -17,8 +17,11 @@ public class LighningBall : MonoBehaviour
         rb.velocity = (transform.rotation * Vector3.forward * speed);
 
 
-        if (GetComponent<ParticleSystem>().isStopped || existTime <= 0)
+        if (existTime <= 0)
+        {
+            Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 0.5f);
             Destroy(gameObject, 1f);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -32,7 +35,6 @@ public class LighningBall : MonoBehaviour
         {
             other.gameObject.GetComponent<HP>().Damaged(1, 0);
         }
-
         Destroy(Instantiate(bulletHitEffect, transform.position, Quaternion.identity), 0.5f);
         Destroy(gameObject);
     }

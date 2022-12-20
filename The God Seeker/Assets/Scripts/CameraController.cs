@@ -6,6 +6,18 @@ public class CameraController : MonoBehaviour
 {
     GameObject player;
 
+    public static CameraController instance;
+
+    public float shake;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+    }
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -17,6 +29,12 @@ public class CameraController : MonoBehaviour
         desiredPosition = new Vector3(Mathf.Clamp(desiredPosition.x, -30, 30), desiredPosition.y, Mathf.Clamp(desiredPosition.z, -48, 100));
         Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, 0.5f);
 
-        transform.position = smoothPosition;
+        if (shake > 0)
+            shake -= Time.deltaTime;
+        else
+            shake = 0;
+
+        transform.position = smoothPosition + Vector3.one * shake * Random.Range(1f,-1f);
+
     }
 }

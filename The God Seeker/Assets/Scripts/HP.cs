@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class HP : MonoBehaviour
 {
-    [SerializeField]
-    int healthPoint, hpMode;
+    public int healthPoint, hpMode;
 
     float damageTime, iFrame;
 

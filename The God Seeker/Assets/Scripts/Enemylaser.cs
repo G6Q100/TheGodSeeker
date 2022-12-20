@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Enemylaser : MonoBehaviour
 {
+    [SerializeField]int damage = 1;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<HP>().Damaged(1, 0);
+            other.gameObject.GetComponent<HP>().Damaged(damage, 0);
         }
     }
 }

@@ -30,14 +30,16 @@ public class GateKeeper : MonoBehaviour
     [SerializeField]
     float idleTime, changeTime = -3f;
 
-    int mode = 0, lastMode = 0;
+    int mode = 0, lastMode = 0, phase = 1;
     float attackSpace = 0;
     Vector3 savePos, DefaultRrightArmPos, DefaultLeftArmPos, rightArmPos, leftArmPos, playerPos;
     Quaternion saveRot;
-    [SerializeField] GameObject rightArm, leftArm;
+
+    [SerializeField] GameObject rightArm, leftArm, attackHead;
+    [SerializeField] GameObject warning;
 
     int fire;
-    [SerializeField] GameObject energyBall, centerPoint;
+    [SerializeField] GameObject energyBall, centerPoint, thunderBall, thunderShock;
 
     private void Start()
     {
@@ -67,19 +69,28 @@ public class GateKeeper : MonoBehaviour
                 Follow();
                 break;
             case 1:
-                ClawAttack();
+                if (phase == 3)
+                    ComboAttack();
+                else
+                    ThunderBlastAttack();
                 break;
             case 2:
                 FireAttack();
                 break;
             case 3:
-                ClawAttack();
+                if (phase == 1)
+                    ClawAttack();
+                else
+                    DashAttack();
                 break;
             case 4:
-                ComboAttack();
+                if (phase == 3)
+                    ClawAttack();
+                else
+                    ComboAttack();
                 break;
             case 5:
-                ThunderBlastAttack();
+                DashAttack();
                 break;
             case 6:
                 ThunderBlastAttack();
@@ -100,17 +111,66 @@ public class GateKeeper : MonoBehaviour
         {
             mode = lastMode;
             attackSpace = 0;
-            if (mode < 5)
-                mode++;
+            if(phase == 1)
+            {
+                if (mode < 4)
+                    mode++;
+                else
+                    mode = 1;
+                lastMode = mode;
+            }
+            else if (phase == 2)
+            {
+                if (mode < 5)
+                    mode++;
+                else
+                    mode = 1;
+                lastMode = mode;
+            }
             else
-                mode = 1;
-            lastMode = mode;
+            {
+                if (mode < 6)
+                    mode++;
+                else
+                    mode = 1;
+                lastMode = mode;
+            }
 
-            if (mode == 2)
+            if(GetComponent<HP>().healthPoint <= 140 && phase == 1)
+            {
+                phase = 2;
+                mode = 5;
+                lastMode = mode;
+            }
+            if (GetComponent<HP>().healthPoint <= 70 && phase == 2)
+            {
+                phase = 3;
+                mode = 6;
+                lastMode = mode;
+            }
+
+            if (mode == 2 || mode == 5 || (mode == 3 && phase != 1))
+            {
                 savePos = transform.position - transform.forward * 12;
+                return;
+            }
 
-            if (mode == 4)
+            if ((mode == 4 && phase != 3) || (mode == 1 && phase == 3))
+            {
                 savePos = transform.position - transform.forward * 15;
+                return;
+            }
+
+            if(mode == 6)
+            {
+                GetComponent<BoxCollider>().enabled = false;
+                attackHead.GetComponent<BoxCollider>().enabled = false;
+                for (int i = 0; i < body.Length - 1; i++)
+                {
+                    body[i].GetComponent<BoxCollider>().enabled = false;
+                }
+                return;
+            }
         }
     }
 
@@ -209,11 +269,18 @@ public class GateKeeper : MonoBehaviour
                 smoothSpeed * 3);
 
             savePos = player.position - transform.forward * 6.5f - transform.right * 3 + transform.up * 3;
+            fire = 0;
             return;
         }
 
         if (attackSpace < 3f)
         {
+            if(fire == 0)
+            {
+                fire = 1;
+                CameraController.instance.shake = 0.5f;
+            }
+
             transform.rotation = saveRot;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
             transform.LookAt(player.position + Vector3.up * 3);
@@ -226,11 +293,11 @@ public class GateKeeper : MonoBehaviour
             return;
         }
 
+        fire = 0;
         rightArmPos = DefaultRrightArmPos;
         rightArm.GetComponent<Rigidbody>().detectCollisions = false;
         changeTime = Random.Range(-2f,2f);
     }
-
 
     void FireAttack()
     {
@@ -256,7 +323,7 @@ public class GateKeeper : MonoBehaviour
             if (fire == 0)
             {
                 fire = 1;
-                transform.LookAt(player.position + Vector3.up);
+                transform.LookAt(player.position + Vector3.up * 1.5f);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
             }
             return;
@@ -277,7 +344,7 @@ public class GateKeeper : MonoBehaviour
             if(fire == 0 && attackSpace > 1.85f)
             {
                 fire = 1;
-                transform.LookAt(player.position + Vector3.up);
+                transform.LookAt(player.position + Vector3.up * 1.5f);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
             }
             return;
@@ -295,10 +362,10 @@ public class GateKeeper : MonoBehaviour
 
         if (attackSpace < 4f)
         {
-            if(fire == 0 && attackSpace > 3.6f)
+            if(fire == 0 && attackSpace > 3.5f)
             {
                 fire = 1;
-                transform.LookAt(player.position + Vector3.up);
+                transform.LookAt(player.position + Vector3.up * 1.5f);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
             }
             return;
@@ -411,18 +478,25 @@ public class GateKeeper : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
             transform.LookAt(player.position + Vector3.up * 3);
 
-            leftArmPos = new Vector3(0.05f, -leftArmPos.y, -leftArmPos.z);
+            leftArmPos = new Vector3(-0.05f, -leftArmPos.y, -leftArmPos.z);
             leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
             smoothSpeed * 3);
             rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
                 smoothSpeed * 3);
 
             savePos = player.position - transform.forward * 6.5f + transform.right * 3 + transform.up * 3;
+            fire = 0;
             return;
         }
 
         if (attackSpace < 4.8f)
         {
+            if (fire == 0)
+            {
+                fire = 1;
+                CameraController.instance.shake = 0.5f;
+            }
+
             transform.rotation = saveRot;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
             transform.LookAt(player.position + Vector3.up * 3);
@@ -435,6 +509,7 @@ public class GateKeeper : MonoBehaviour
             return;
         }
 
+        fire = 0;
         leftArmPos = DefaultLeftArmPos;
         leftArm.GetComponent<Rigidbody>().detectCollisions = false;
         changeTime = Random.Range(-2f, 2f);
@@ -442,6 +517,129 @@ public class GateKeeper : MonoBehaviour
 
     void DashAttack()
     {
+        attackSpace += Time.deltaTime;
+
+        if (attackSpace < 0.6f)
+        {
+            transform.LookAt(player.position + Vector3.up * 3);
+            saveRot = transform.rotation;
+
+            transform.position = Vector3.Lerp(transform.position, new Vector3(savePos.x, 3.5f, savePos.z), smoothSpeed);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (attackSpace < 0.1f)
+                warning.SetActive(false);
+            else
+                warning.SetActive(true);
+            return;
+        }
+
+        if (attackSpace < 1f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                savePos = transform.position + transform.forward * (Vector3.Distance(transform.position, player.position) * 2 + 2);
+                saveRot = transform.rotation;
+
+                warning.SetActive(false); 
+                GetComponent<BoxCollider>().enabled = false;
+                attackHead.GetComponent<BoxCollider>().enabled = true;
+                for (int i = 0; i < body.Length - 1; i++)
+                {
+                    body[i].GetComponent<BoxCollider>().enabled = false;
+                }
+            }
+            return;
+        }
+        if (attackSpace < 1.6f)
+        {
+
+            transform.position = Vector3.Lerp(transform.position, new Vector3(savePos.x, transform.position.y, savePos.z), smoothSpeed * 2);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed);
+
+            if (attackSpace < 1.1f)
+                warning.SetActive(false);
+            else
+                warning.SetActive(true);
+            fire = 0;
+            return;
+        }
+
+        if (attackSpace < 2f)
+        {
+            if(fire == 0)
+            {
+                fire = 1;
+                savePos = transform.position + transform.forward * (Vector3.Distance(transform.position, player.position) * 2 + 2);
+                saveRot = transform.rotation;
+
+                warning.SetActive(false);
+            }
+            return;
+        }
+
+        if (attackSpace < 2.6f)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(savePos.x, transform.position.y, savePos.z), smoothSpeed * 2);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed);
+
+            if (attackSpace < 2.1f)
+                warning.SetActive(false);
+            else
+                warning.SetActive(true);
+            fire = 0;
+            return;
+        }
+
+        if (attackSpace < 3f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                savePos = transform.position + transform.forward * (Vector3.Distance(transform.position, player.position) * 2 + 2);
+                saveRot = transform.rotation;
+
+                warning.SetActive(false);
+            }
+            return;
+        }
+
+        if (attackSpace < 3.6f)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(savePos.x, transform.position.y, savePos.z), smoothSpeed * 2);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed);
+            return;
+        }
+        transform.position += Vector3.up * 3;
+
+        fire = 0;
+        GetComponent<BoxCollider>().enabled = true;
+        attackHead.GetComponent<BoxCollider>().enabled = false;
+        for (int i = 0; i < body.Length - 1; i++)
+        {
+            body[i].GetComponent<BoxCollider>().enabled = true;
+        }
+        changeTime = Random.Range(-2f, 2f);
     }
 
     void ThunderBlastAttack()
@@ -450,6 +648,12 @@ public class GateKeeper : MonoBehaviour
 
         if (attackSpace < 3f)
         {
+            if(attackSpace > 1 && fire == 0)
+            {
+                fire = 1;
+                Instantiate(thunderBall, centerPoint.transform.position + Vector3.up * 2, Quaternion.identity);
+            }
+
             transform.LookAt(centerPoint.transform.position + Vector3.up * 3);
             rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
              smoothSpeed * 3);
@@ -463,12 +667,14 @@ public class GateKeeper : MonoBehaviour
                 RotationSpeed = 5f;
                 ElevationOffset = 5;
             }
+
             CircleMove(centerPoint.transform.position);
             return;
         }
-        if (attackSpace < 9f)
+
+        if (attackSpace < 13f)
         {
-            transform.LookAt(centerPoint.transform.position + Vector3.up * 30);
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 70);
             rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
              smoothSpeed * 3);
             leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
@@ -477,14 +683,90 @@ public class GateKeeper : MonoBehaviour
             if (circling == 0)
             {
                 circling = 1;
-                CircleRadius = 65;
+                CircleRadius = 80;
                 RotationSpeed = 1f;
-                ElevationOffset = 45;
+                ElevationOffset = 65;
             }
-            CircleMove(centerPoint.transform.position + Vector3.up * 30);
+            CircleMove(centerPoint.transform.position + Vector3.up * 70);
             return;
         }
 
+        if (attackSpace < 13.5f)
+        {
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+            savePos = centerPoint.transform.position + Vector3.up * 2;
+
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 10);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            return;
+        }
+
+        if (attackSpace < 15f)
+        {
+            if (attackSpace < 14.5f)
+            {
+                transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+                warning.SetActive(true);
+                fire = 0;
+            }
+            else
+            {
+                if (fire == 0)
+                {
+                    fire = 1;
+                    savePos = transform.position - transform.forward * 5 + transform.up;
+                }
+                warning.SetActive(false);
+            }
+
+            saveRot = transform.rotation;
+
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 10);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed);
+            return;
+        }
+        if (attackSpace < 18f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                savePos = transform.position + transform.forward * 5 + transform.up;
+            }
+
+            thunderShock.SetActive(true);
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 10);
+
+            var targetRotation = Quaternion.LookRotation(player.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothSpeed);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            CameraController.instance.shake = 0.5f;
+            return;
+        }
+        transform.position += Vector3.up * 3;
+
+        GetComponent<BoxCollider>().enabled = true;
+        attackHead.GetComponent<BoxCollider>().enabled = false;
+        for (int i = 0; i < body.Length - 1; i++)
+        {
+            body[i].GetComponent<BoxCollider>().enabled = true;
+        }
+
+        thunderShock.SetActive(false);
         changeTime = Random.Range(-2f, 2f);
     }
 
@@ -502,7 +784,7 @@ public class GateKeeper : MonoBehaviour
             {
                 idleTime = 0;
             }
-            CircleRadius = 6f + Mathf.Sin(idleTime * 1.2f) * 1f;
+            CircleRadius = 5.5f + Mathf.Sin(idleTime * 1.2f) * 0.5f;
             ElevationOffset = 6f + Mathf.Sin(idleTime * 1.2f) * 2f;
             RotationSpeed = 1 + Mathf.Sin(idleTime * 1.2f) * 0.3f;
         }
@@ -510,7 +792,6 @@ public class GateKeeper : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, target + positionOffset, smoothSpeed * 3);
         angle += Time.deltaTime * RotationSpeed;
     }
-
 
     void BodyCreate()
     {

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class ShockWave : MonoBehaviour
 {
-    float alpha;
-    private void FixedUpdate()
+    private void Update()
     {
         gameObject.transform.localScale += Vector3.one * 15f * Time.deltaTime;
-        alpha += Time.deltaTime;
     }
     private void OnTriggerEnter(Collider other)
     {
