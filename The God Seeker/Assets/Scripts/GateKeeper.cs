@@ -40,7 +40,8 @@ public class GateKeeper : MonoBehaviour
     [SerializeField] GameObject warning;
 
     int fire;
-    [SerializeField] GameObject energyBall, centerPoint, thunderBall, thunderShock;
+    [SerializeField] GameObject energyBall, centerPoint, thunderBall, thunderShock, lightning,
+        lightningDrop, music, music2;
     [SerializeField] Animator dirLight, hpBar;
     [SerializeField] Material thunderDragon;
 
@@ -76,7 +77,7 @@ public class GateKeeper : MonoBehaviour
                 break;
             case 1:
                 if (phase == 3)
-                    ComboAttack();
+                    ThunderClawAttack();
                 else
                     ClawAttack();
                 break;
@@ -142,16 +143,16 @@ public class GateKeeper : MonoBehaviour
                 lastMode = mode;
             }
 
-            if(GetComponent<HP>().healthPoint <= 150 && phase == 1)
+            if(GetComponent<HP>().healthPoint <= 225 && phase == 1)
             {
                 phase = 2;
                 mode = 5;
                 lastMode = mode;
             }
-            if (GetComponent<HP>().healthPoint <= 105 && phase == 2)
+            if (GetComponent<HP>().healthPoint <= 150 && phase == 2)
             {
                 phase = 3;
-                lastMode = 6;
+                lastMode = 5;
                 mode = -1;
 
                 GetComponent<BoxCollider>().enabled = false;
@@ -658,13 +659,243 @@ public class GateKeeper : MonoBehaviour
         changeTime = Random.Range(-2f, 2f);
     }
 
+    void Phase2Change()
+    {
+        attackSpace += Time.deltaTime;
+
+        if (attackSpace < 2f)
+        {
+            music.GetComponent<AudioSource>().volume -= Time.deltaTime / 2;
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 3);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (circling == 0)
+            {
+                circling = 1;
+                CircleRadius = 15;
+                RotationSpeed = 5f;
+                ElevationOffset = 5;
+            }
+
+            CircleMove(centerPoint.transform.position);
+            return;
+        }
+
+        if (attackSpace < 5f)
+        {
+            music.GetComponent<AudioSource>().volume = 0;
+            if (attackSpace > 4 && fire == 0)
+            {
+                fire = 1;
+                dirLight.SetBool("Thunder", true);
+                CameraController.instance.player = player.gameObject;
+            }
+
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 70);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (circling == 0)
+            {
+                circling = 1;
+                CircleRadius = 80;
+                RotationSpeed = 1f;
+                ElevationOffset = 30;
+            }
+            CircleMove(centerPoint.transform.position + Vector3.up * 60);
+            return;
+        }
+
+        fire = 0;
+
+        music.SetActive(false);
+        music2.SetActive(true);
+        hpBar.SetTrigger("FadeIn");
+        lightningDrop.SetActive(true);
+        CameraController.instance.player = player.gameObject;
+        foreach (Transform effect in lightningEffect)
+        {
+            effect.gameObject.SetActive(true);
+        }
+
+        GetComponent<BoxCollider>().enabled = true;
+        attackHead.GetComponent<BoxCollider>().enabled = false;
+        for (int i = 0; i < body.Length - 1; i++)
+        {
+            body[i].GetComponent<BoxCollider>().enabled = true;
+        }
+
+        GetComponent<HP>().normalM = thunderDragon;
+        changeTime = Random.Range(-2f, 2f);
+    }
+
+    void ThunderClawAttack()
+    {
+        attackSpace += Time.deltaTime;
+
+        transform.LookAt(player.position + Vector3.up * 3);
+        if (attackSpace < 0.6f)
+        {
+            savePos = transform.position - transform.forward * 16 + transform.up;
+            saveRot = transform.rotation;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+        if (attackSpace < 0.9f)
+        {
+            transform.rotation = saveRot;
+            savePos = player.position - transform.forward * 12 + transform.right * 12 + transform.up * 3;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 1.2f)
+        {
+            transform.rotation = saveRot;
+            savePos = player.position - transform.forward * 10 - transform.right * 12 + transform.up * 3;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 1.5f)
+        {
+            playerPos = player.transform.position + transform.up * 1;
+        }
+
+        if (attackSpace < 1.8f)
+        {
+            transform.rotation = saveRot;
+            savePos = player.position - transform.forward * 8 + transform.right * 12 + transform.up * 5;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+            transform.LookAt(player.position + Vector3.up * 3);
+
+            rightArmPos = new Vector3(0.05f, -rightArmPos.y, -rightArmPos.z);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            savePos = player.position - transform.forward * 6.5f - transform.right * 3 + transform.up * 3;
+            fire = 0;
+            return;
+        }
+
+        if (attackSpace < 2.5f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                CameraController.instance.shake = 0.5f;
+            }
+
+            transform.rotation = saveRot;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+            transform.LookAt(player.position + Vector3.up * 3);
+            rightArm.GetComponent<Rigidbody>().detectCollisions = true;
+
+            rightArm.transform.position = Vector3.Lerp(rightArm.transform.position, playerPos,
+                smoothSpeed * 10);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+        if (attackSpace < 2.8f)
+        {
+            fire = 0;
+            leftArmPos = DefaultLeftArmPos;
+            rightArmPos = DefaultRrightArmPos;
+            rightArm.GetComponent<Rigidbody>().detectCollisions = false;
+            transform.LookAt(player.position + Vector3.up * 3);
+            return;
+        }
+
+        if (attackSpace <= 3.3f)
+        {
+            leftArmPos = new Vector3(-0.05f, -leftArmPos.y, -leftArmPos.z);
+            rightArmPos = new Vector3(0.05f, -rightArmPos.y, -rightArmPos.z);
+            transform.rotation = saveRot;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+            rightArm.transform.position = Vector3.Lerp(rightArm.transform.position, playerPos,
+                smoothSpeed * 10);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 3.9f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                Vector3 spawnPoint = new Vector3(transform.position.x, 0.1f, transform.position.z);
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 0, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 45, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 90, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 135, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 180, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 225, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 270, 0));
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, 315, 0));
+                return;
+            }
+
+            transform.rotation = saveRot;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+            rightArm.transform.position = Vector3.Lerp(rightArm.transform.position, playerPos,
+                smoothSpeed * 10);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+        if (attackSpace < 5f)
+        {
+            transform.rotation = saveRot;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
+
+            leftArmPos = new Vector3(-0.05f, -leftArmPos.y, -leftArmPos.z);
+            rightArmPos = new Vector3(0.05f, -rightArmPos.y, -rightArmPos.z);
+            rightArm.transform.position = Vector3.Lerp(rightArm.transform.position, playerPos,
+                smoothSpeed * 10);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            return;
+        }
+
+        leftArmPos = DefaultLeftArmPos;
+        rightArmPos = DefaultRrightArmPos;
+        fire = 0;
+        changeTime = Random.Range(-2f, 2f);
+    }
     void ThunderBlastAttack()
     {
         attackSpace += Time.deltaTime;
 
         if (attackSpace < 3f)
         {
-            if(attackSpace > 1 && fire == 0)
+            if (attackSpace > 1 && fire == 0)
             {
                 fire = 1;
                 Instantiate(thunderBall, centerPoint.transform.position + Vector3.up * 2, Quaternion.identity);
@@ -783,75 +1014,6 @@ public class GateKeeper : MonoBehaviour
         }
 
         thunderShock.SetActive(false);
-        changeTime = Random.Range(-2f, 2f);
-    }
-
-    void Phase2Change()
-    {
-        attackSpace += Time.deltaTime;
-
-        if (attackSpace < 2f)
-        {
-            transform.LookAt(centerPoint.transform.position + Vector3.up * 3);
-            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
-             smoothSpeed * 3);
-            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
-                smoothSpeed * 3);
-
-            if (circling == 0)
-            {
-                circling = 1;
-                CircleRadius = 15;
-                RotationSpeed = 5f;
-                ElevationOffset = 5;
-            }
-
-            CircleMove(centerPoint.transform.position);
-            return;
-        }
-
-        if (attackSpace < 5f)
-        {
-            if (attackSpace > 4 && fire == 0)
-            {
-                fire = 1;
-                dirLight.SetBool("Thunder", true);
-                CameraController.instance.player = player.gameObject;
-            }
-
-            transform.LookAt(centerPoint.transform.position + Vector3.up * 70);
-            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
-             smoothSpeed * 3);
-            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
-                smoothSpeed * 3);
-
-            if (circling == 0)
-            {
-                circling = 1;
-                CircleRadius = 80;
-                RotationSpeed = 1f;
-                ElevationOffset = 30;
-            }
-            CircleMove(centerPoint.transform.position + Vector3.up * 60);
-            return;
-        }
-
-        fire = 0;
-        hpBar.SetTrigger("FadeIn");
-        CameraController.instance.player = player.gameObject;
-        foreach (Transform effect in lightningEffect)
-        {
-            effect.gameObject.SetActive(true);
-        }
-
-        GetComponent<BoxCollider>().enabled = true;
-        attackHead.GetComponent<BoxCollider>().enabled = false;
-        for (int i = 0; i < body.Length - 1; i++)
-        {
-            body[i].GetComponent<BoxCollider>().enabled = true;
-        }
-
-        GetComponent<HP>().normalM = thunderDragon;
         changeTime = Random.Range(-2f, 2f);
     }
 

@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
 
-    public static CameraController instance;
+    public static CameraController instance = null;
 
     public float shake;
 

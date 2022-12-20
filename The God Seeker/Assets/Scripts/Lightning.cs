@@ -6,12 +6,13 @@ public class Lightning : MonoBehaviour
 {
     [SerializeField] GameObject lightning, warning;
     float animSpace;
+    [SerializeField] float shake = 0.35f;
     int fire = 0;
 
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player2");
-        Physics.IgnoreCollision(lightning.GetComponent<BoxCollider>(), player.GetComponent<SphereCollider>());
+        Physics.IgnoreCollision(lightning.GetComponent<BoxCollider>(), player.GetComponent<CapsuleCollider>());
     }
 
     private void Update()
@@ -23,12 +24,12 @@ public class Lightning : MonoBehaviour
             lightning.SetActive(false);
             return;
         }
-        if (animSpace < 1)
+        if (animSpace < 0.9f)
         {
             if (fire == 0)
             {
                 fire = 1;
-                CameraController.instance.shake = 0.25f;
+                CameraController.instance.shake = shake;
             }
             warning.SetActive(false);
             lightning.SetActive(true);

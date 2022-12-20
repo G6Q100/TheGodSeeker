@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightning: {fileID: 5722781614537973930}
   warning: {fileID: 5722781613253163493}
+  shake: 0.35
 --- !u!1 &5722781614537973930
 GameObject:
   m_ObjectHideFlags: 0
@@ -4980,3 +4981,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0886533c51270342b5fdf461c61a0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1

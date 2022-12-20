@@ -167,7 +167,7 @@ public class HP : MonoBehaviour
                 break;
             case 5:
                 healthPoint -= hp;
-                hpBar.value = Mathf.Clamp(healthPoint, 0, 210);
+                hpBar.value = Mathf.Clamp(healthPoint, 0, 300);
                 damageTime = 0.1f;
                 if (healthPoint <= 0)
                 {
