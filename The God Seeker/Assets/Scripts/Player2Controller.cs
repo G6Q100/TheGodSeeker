@@ -6,13 +6,15 @@ using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour
 {
-    public GameObject player1, popUp, popUp2;
+    public GameObject player1, popUp, popUp2, healing;
 
     NavMeshAgent agent;
 
     float teleportCD, dashCD;
 
-    public Slider teleportSlider;
+    public int hitTime;
+
+    public Slider teleportSlider, hitTimeSlider;
 
     Vector3 lastStand;
 
@@ -117,6 +119,11 @@ public class Player2Controller : MonoBehaviour
         {
             dashCD -= Time.deltaTime;
         }
+    }
+
+    public void SpwanHeal()
+    {
+        Instantiate(healing, transform.position + transform.up, Quaternion.Euler(90, 0 , 0));
     }
 
     private void OnTriggerEnter(Collider other)

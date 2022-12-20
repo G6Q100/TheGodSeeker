@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController characterController;
     Animator anim;
-    int speed = 10, maxGravity = -5;
+    int speed = 10, maxGravity = -8;
 
     [SerializeField] float gravity = 0, attacking = 0;
     [SerializeField]int jumpTime = 1;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
         if (attacking > 0.1f)
         {
-            maxGravity = -5;
+            maxGravity = -8;
             return;
         }
 
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        gravity -= 20f * Time.deltaTime;
+        gravity -= 25f * Time.deltaTime;
 
         float v = Input.GetAxis("Horizontal") * speed;
         float h = Input.GetAxis("Vertical") * speed;
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) &&
             jumpTime == 1 && attacking <= 0)
         {
-            gravity = 10;
+            gravity = 20;
         }
 
         if (gravity < maxGravity)

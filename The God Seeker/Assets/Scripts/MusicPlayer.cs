@@ -9,13 +9,13 @@ public class MusicPlayer : MonoBehaviour
 
     public Slider volumeSlider;
 
-    private float MusicVolume = 1f;
+    private float MusicVolume = 1f, tempVolume = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         AudioSource.Play();
-        MusicVolume = PlayerPrefs.GetFloat("volume");
+        MusicVolume = PlayerPrefs.GetFloat("volume") * tempVolume;
         AudioSource.volume = MusicVolume;
         volumeSlider.value = MusicVolume;
     }

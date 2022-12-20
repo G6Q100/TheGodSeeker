@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  knockback: 0
+  mode: 2
 --- !u!136 &8442237015576636169
 CapsuleCollider:
   m_ObjectHideFlags: 0

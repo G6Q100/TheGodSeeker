@@ -5,19 +5,42 @@ using UnityEngine;
 public class DamageArea : MonoBehaviour
 {
     [SerializeField]
-    int damage, knockback;
+    int damage, knockback, mode = 1;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<HP>().Damaged(damage, knockback);
+            if (mode == 2)
+            {
+                Player2Controller player2 = GameObject.Find("Player2").GetComponent<Player2Controller>();
+                player2.hitTime++;
+                player2.hitTimeSlider.value = player2.hitTime;
+
+                if (player2.hitTime >= 20)
+                {
+                    player2.hitTime = 0;
+                    player2.SpwanHeal();
+                }
+            }
             Destroy(gameObject);
             return;
         }
         if (other.gameObject.tag == "Segment")
         {
-            other.gameObject.GetComponent<SegmentRotation>().GetHit(damage, 0);
+            if (mode == 2)
+            {
+                Player2Controller player2 = GameObject.Find("Player2").GetComponent<Player2Controller>();
+                player2.hitTime++;
+                player2.hitTimeSlider.value = player2.hitTime;
+
+                if (player2.hitTime >= 20)
+                {
+                    player2.hitTime = 0;
+                    player2.SpwanHeal();
+                }
+            }
             Destroy(gameObject);
         }
     }

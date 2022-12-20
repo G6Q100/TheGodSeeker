@@ -669,7 +669,7 @@ public class GateKeeper : MonoBehaviour
 
         if (attackSpace < 2f)
         {
-            music.GetComponent<AudioSource>().volume -= Time.deltaTime / 2;
+            music.GetComponent<AudioSource>().volume = music.GetComponent<AudioSource>().volume - attackSpace /2;
             transform.LookAt(centerPoint.transform.position + Vector3.up * 3);
             rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
              smoothSpeed * 3);

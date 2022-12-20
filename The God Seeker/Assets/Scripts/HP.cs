@@ -44,6 +44,7 @@ public class HP : MonoBehaviour
                 }
                 break;
             case 2:
+                hpBar.value = Mathf.Clamp(healthPoint, 0, 20);
                 if (damageTime > 0)
                 {
                     damageTime -= Time.deltaTime;
@@ -180,7 +181,7 @@ public class HP : MonoBehaviour
         IEnumerator Restart()
         {
             yield return new WaitForSeconds(1);
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

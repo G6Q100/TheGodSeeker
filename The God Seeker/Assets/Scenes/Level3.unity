@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -40068,6 +40068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   shake: 0
+  maxZ: 100
 --- !u!4 &967194662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7ff72920fc79a064d895903bd1dd379d, type: 3}
@@ -69129,7 +69130,10 @@ MonoBehaviour:
   player1: {fileID: 2515118426551758867}
   popUp: {fileID: 1645742802}
   popUp2: {fileID: 152960009}
+  healing: {fileID: 6521442888486096010, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+  hitTime: 0
   teleportSlider: {fileID: 31564047}
+  hitTimeSlider: {fileID: 1344247816}
   attackRange: {fileID: 200602823}
   dashArea: {fileID: 5024967489570048447, guid: 31577128862c3764f82270b36e9f0594, type: 3}
 --- !u!195 &1486969129
