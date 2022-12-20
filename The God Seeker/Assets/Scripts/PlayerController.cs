@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J) && jumpTime > 0)
         {
             attacking = 0.4f;
+            anim.SetTrigger("Attack");
             Destroy(Instantiate(sword, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
             mode = "attack";
             return;
