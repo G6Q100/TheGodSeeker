@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused && !IsOption)
             {
                 Resume();
-            } else
+            } else if (!IsOption)
             {
                 Pause();
             }
