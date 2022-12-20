@@ -41,7 +41,8 @@ public class GateKeeper : MonoBehaviour
 
     int fire;
     [SerializeField] GameObject energyBall, centerPoint, thunderBall, thunderShock, lightning,
-        lightningDrop, music, music2;
+        lightningDrop, music;
+    [SerializeField] AudioClip bg2;
     [SerializeField] Animator dirLight, hpBar;
     [SerializeField] Material thunderDragon;
 
@@ -82,7 +83,10 @@ public class GateKeeper : MonoBehaviour
                     ClawAttack();
                 break;
             case 2:
-                FireAttack();
+                if (phase == 3)
+                    RipidFireAttack();
+                else
+                    FireAttack();
                 break;
             case 3:
                 if (phase == 1)
@@ -713,8 +717,8 @@ public class GateKeeper : MonoBehaviour
 
         fire = 0;
 
-        music.SetActive(false);
-        music2.SetActive(true);
+        music.GetComponent<AudioSource>().Stop();
+        music.GetComponent<AudioSource>().PlayOneShot(bg2, 1);
         hpBar.SetTrigger("FadeIn");
         lightningDrop.SetActive(true);
         CameraController.instance.player = player.gameObject;
@@ -889,6 +893,145 @@ public class GateKeeper : MonoBehaviour
         fire = 0;
         changeTime = Random.Range(-2f, 2f);
     }
+
+    void RipidFireAttack()
+    {
+        attackSpace += Time.deltaTime;
+
+        transform.LookAt(player.position + Vector3.up * 3);
+        if (attackSpace < 0.6f)
+        {
+            fire = 0;
+
+            saveRot = transform.rotation;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 0.8f)
+        {
+            if (fire == 0)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up * 1.5f);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        if (attackSpace < 1.1f)
+        {
+            fire = 0;
+            circling = 1;
+            CircleRadius = 15;
+            RotationSpeed = 5;
+            CircleMove(player.position);
+            return;
+        }
+
+        if (attackSpace < 1.5f)
+        {
+            if(fire == 0 && attackSpace > 1.3f)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up * 1.5f);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        if (attackSpace < 1.8f)
+        {
+            fire = 0;
+            circling = 1;
+            CircleRadius = 15;
+            RotationSpeed = 5;
+            CircleMove(player.position);
+            return;
+        }
+
+        if (attackSpace < 2.2f)
+        {
+            if (fire == 0 && attackSpace > 2f)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up * 1.5f);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        if (attackSpace < 2.5f)
+        {
+            fire = 0;
+            circling = 1;
+            CircleRadius = 15;
+            RotationSpeed = 5;
+            CircleMove(player.position);
+            return;
+        }
+        if (attackSpace < 2.2f)
+        {
+            if (fire == 0 && attackSpace > 2f)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up * 1.5f);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        if (attackSpace < 2.5f)
+        {
+            fire = 0;
+            circling = 1;
+            CircleRadius = 15;
+            RotationSpeed = 5;
+            CircleMove(player.position);
+            return;
+        }
+
+        if (attackSpace < 2.9f)
+        {
+            if (fire == 0 && attackSpace > 2.7f)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up * 1.5f);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        if (attackSpace < 3.3f)
+        {
+            fire = 0;
+            circling = 1;
+            CircleRadius = 15;
+            RotationSpeed = 5;
+            CircleMove(player.position);
+            return;
+        }
+
+        if (attackSpace < 4f)
+        {
+            if(fire == 0 && attackSpace > 3.5f)
+            {
+                fire = 1;
+                transform.LookAt(player.position + Vector3.up * 1.5f);
+                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+            }
+            return;
+        }
+
+        fire = 0;
+        changeTime = Random.Range(-2f, 2f);
+    }
+
     void ThunderBlastAttack()
     {
         attackSpace += Time.deltaTime;

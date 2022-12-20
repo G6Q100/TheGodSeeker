@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -174,7 +174,7 @@ MonoBehaviour:
   - 
   - 
   p2Text:
-  - Number key 1
+  - NumPad 1
   - to swap place
   mode: 2
   bridge: []
@@ -14951,6 +14951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc011bce8f6ef24ea13f46ae2720ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   shake: 0
 --- !u!1001 &971476357
 PrefabInstance:
