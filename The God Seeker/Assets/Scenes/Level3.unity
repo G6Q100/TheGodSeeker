@@ -1050,7 +1050,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &140397244
 Rigidbody:
@@ -5940,7 +5940,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &166154157
 Rigidbody:
@@ -6157,7 +6157,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &178586681
 Rigidbody:
@@ -6879,7 +6879,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &276738716
 Rigidbody:
@@ -6968,7 +6968,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &287296626
 Rigidbody:
@@ -8282,7 +8282,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &576752568
 Rigidbody:
@@ -9988,7 +9988,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &940844625
 Rigidbody:
@@ -10157,7 +10157,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.1}
+  m_Size: {x: 0.01, y: 0.02, z: 0.1}
   m_Center: {x: 0.02, y: 0.005, z: 0.025}
 --- !u!54 &961976489
 Rigidbody:
@@ -10940,7 +10940,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1010850833
 Rigidbody:
@@ -12711,7 +12711,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1207984741
 Rigidbody:
@@ -12859,7 +12859,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1234313525
 Rigidbody:
@@ -13584,7 +13584,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1304399401
 Rigidbody:
@@ -14689,10 +14689,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56c2cc70e380dc4db96f01dc0207a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
+  player1: {fileID: 2515118426551758867}
   popUp: {fileID: 1645742802}
   popUp2: {fileID: 152960009}
-  teleportSlider: {fileID: 0}
+  teleportSlider: {fileID: 31564047}
   attackRange: {fileID: 200602823}
   dashArea: {fileID: 5024967489570048447, guid: 31577128862c3764f82270b36e9f0594, type: 3}
 --- !u!195 &1486969129
@@ -14762,7 +14762,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1498817238
 Rigidbody:
@@ -14910,7 +14910,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1517193668
 Rigidbody:
@@ -19952,7 +19952,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1537108624
 Rigidbody:
@@ -20312,7 +20312,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1573356421
 Rigidbody:
@@ -25880,7 +25880,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1699757326
 Rigidbody:
@@ -26336,7 +26336,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &1734681246
 Rigidbody:
@@ -27079,7 +27079,7 @@ MonoBehaviour:
   - {fileID: 940844623}
   - {fileID: 1234313523}
   - {fileID: 961976486}
-  player: {fileID: 0}
+  player: {fileID: 2515118426551758870}
   RotationSpeed: 1
   CircleRadius: 10
   ElevationOffset: 5
@@ -27116,7 +27116,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.1, z: 0.05}
+  m_Size: {x: 0.02, y: 0.15, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0.02}
 --- !u!114 &1823617808
 MonoBehaviour:
@@ -27184,7 +27184,7 @@ MonoBehaviour:
   - {fileID: 136734226290979912}
   normalM: {fileID: -7055596523063441016, guid: 681f488b5bf134a48bdac036f8c0aa00, type: 3}
   damagedM: {fileID: 2100000, guid: dfc75f3d2e6087246862f5c4420a9a7a, type: 2}
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 1676920255}
 --- !u!1001 &1831770363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30292,7 +30292,7 @@ MonoBehaviour:
   modelPart: []
   normalM: {fileID: 8425554794358695251, guid: 4389497c943df114c9dea9bd537179ce, type: 3}
   damagedM: {fileID: 2100000, guid: dfc75f3d2e6087246862f5c4420a9a7a, type: 2}
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 597216790}
 --- !u!198 &2515118427595249314
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -37181,7 +37181,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.1, z: 0.02}
+  m_Size: {x: 0.01, y: 0.2, z: 0.02}
   m_Center: {x: 0, y: 0.02, z: 0.025}
 --- !u!54 &6452530428345840757
 Rigidbody:

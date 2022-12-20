@@ -81,6 +81,9 @@ public class GateKeeper : MonoBehaviour
             case 5:
                 ThunderBlastAttack();
                 break;
+            case 6:
+                ThunderBlastAttack();
+                break;
         }
     }
 
@@ -355,10 +358,20 @@ public class GateKeeper : MonoBehaviour
             }
             return;
         }
-
-        fire = 0;
-
         if (attackSpace < 2.3f)
+        {
+            savePos = transform.position - transform.forward * 16 + transform.up;
+            saveRot = transform.rotation;
+            transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed);
+
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+            smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+            return;
+        }
+
+        if (attackSpace < 2.6f)
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 12 - transform.right * 12 + transform.up * 3;
@@ -372,7 +385,7 @@ public class GateKeeper : MonoBehaviour
             return;
         }
 
-        if (attackSpace < 2.6f)
+        if (attackSpace < 2.9f)
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 10 + transform.right * 12 + transform.up * 3;
@@ -386,12 +399,12 @@ public class GateKeeper : MonoBehaviour
             return;
         }
 
-        if (attackSpace < 2.9f)
+        if (attackSpace < 3.2f)
         {
             playerPos = player.transform.position + transform.up * 1;
         }
 
-        if (attackSpace < 3.2f)
+        if (attackSpace < 3.5f)
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 8 - transform.right * 12 + transform.up * 5;
@@ -408,7 +421,7 @@ public class GateKeeper : MonoBehaviour
             return;
         }
 
-        if (attackSpace < 4.4f)
+        if (attackSpace < 4.8f)
         {
             transform.rotation = saveRot;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
@@ -425,6 +438,10 @@ public class GateKeeper : MonoBehaviour
         leftArmPos = DefaultLeftArmPos;
         leftArm.GetComponent<Rigidbody>().detectCollisions = false;
         changeTime = Random.Range(-2f, 2f);
+    }
+
+    void DashAttack()
+    {
     }
 
     void ThunderBlastAttack()
