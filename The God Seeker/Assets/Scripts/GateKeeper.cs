@@ -96,7 +96,7 @@ public class GateKeeper : MonoBehaviour
                 break;
             case 4:
                 if (phase == 3)
-                    ClawAttack();
+                    ThunderClawAttack();
                 else
                     ComboAttack();
                 break;
@@ -718,7 +718,9 @@ public class GateKeeper : MonoBehaviour
         fire = 0;
 
         music.GetComponent<AudioSource>().Stop();
-        music.GetComponent<AudioSource>().PlayOneShot(bg2, 1);
+        music.GetComponent<AudioSource>().clip = bg2;
+        music.GetComponent<AudioSource>().volume = 1;
+        music.GetComponent<AudioSource>().Play();
         hpBar.SetTrigger("FadeIn");
         lightningDrop.SetActive(true);
         CameraController.instance.player = player.gameObject;

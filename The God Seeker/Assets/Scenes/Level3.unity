@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -51151,7 +51151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7345d11c8485e364a889f6840cb013f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 229763945}
 --- !u!4 &1069331732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4e5f47ecc6ad63f4bb34b0214b44b84c, type: 3}
@@ -80208,7 +80207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1620968984
 Transform:
   m_ObjectHideFlags: 0
@@ -105985,7 +105984,7 @@ MonoBehaviour:
   lightning: {fileID: 5722781613563283806, guid: b5f028431aaa8534db4b1d52ecc08e30, type: 3}
   lightningDrop: {fileID: 986191297}
   music: {fileID: 880159879}
-  music2: {fileID: 338862071}
+  bg2: {fileID: 8300000, guid: 24c95fd27dc332d4e8e90f216dfaf533, type: 3}
   dirLight: {fileID: 705507996}
   hpBar: {fileID: 1676920256}
   thunderDragon: {fileID: 2100000, guid: 85663943e5257e946916754388a0ea8e, type: 2}
