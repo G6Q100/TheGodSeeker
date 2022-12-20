@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        gravity -= 15f * Time.deltaTime;
+        gravity -= 20f * Time.deltaTime;
 
         float v = Input.GetAxis("Horizontal") * speed;
         float h = Input.GetAxis("Vertical") * speed;

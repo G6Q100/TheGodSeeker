@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4045223, g: 0.42588407, b: 0.42873728, a: 1}
+  m_IndirectSpecularColor: {r: 0.40452203, g: 0.42588386, b: 0.428737, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6204,17 +6204,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1315312563766266678, guid: 4389497c943df114c9dea9bd537179ce, type: 3}
   m_PrefabInstance: {fileID: 166732326}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1808284981 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2180021134098377842, guid: ec67e4aad0802474faa398d69b438815, type: 3}
-  m_PrefabInstance: {fileID: 2180021133733990727}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5ec204adfc5af499c3703ca8128f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1843677761
 GameObject:
   m_ObjectHideFlags: 0
@@ -6402,8 +6391,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicControl
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2180021134098377842, guid: ec67e4aad0802474faa398d69b438815, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ec67e4aad0802474faa398d69b438815, type: 3}
+--- !u!1 &2180021133733990728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2180021134098377843, guid: ec67e4aad0802474faa398d69b438815, type: 3}
+  m_PrefabInstance: {fileID: 2180021133733990727}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2180021133733990729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2180021133733990728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d6ca0e19fcf204581f74896df316c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioSource: {fileID: 777803907}
+  volumeSlider: {fileID: 1583935856}
 --- !u!1001 &5414701047165000205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6530,7 +6539,7 @@ PrefabInstance:
     - target: {fileID: 5414701048744668029, guid: b811cc2a317d1fb48a721f9297108afa, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1808284981}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b811cc2a317d1fb48a721f9297108afa, type: 3}
 --- !u!1001 &8494686801944282174
