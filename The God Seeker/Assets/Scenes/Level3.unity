@@ -30563,7 +30563,14 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'QuickRigCharacter_RightLeg'\n\tTransform 'QuickRigCharacter_RightForeArm'\n\tTransform
+    'QuickRigCharacter_LeftLeg'\n\tTransform 'QuickRigCharacter_LeftForeArm'\n\tTransform
+    'QuickRigCharacter_Neck'\n\tTransform 'QuickRigCharacter_RightLeg'\n\tTransform
+    'QuickRigCharacter_LeftUpLeg'\n\tTransform 'QuickRigCharacter_Hips'\n\tTransform
+    'QuickRigCharacter_RightFoot'\n\tTransform 'QuickRigCharacter_LeftFoot'\n\tand
+    more ...\n\tFrom animation clip 'Jump'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0

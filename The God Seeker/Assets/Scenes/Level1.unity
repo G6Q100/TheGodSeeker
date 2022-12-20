@@ -7013,11 +7013,9 @@ MonoBehaviour:
   p1Text:
   - 
   - 
-  - 
   p2Text:
-  - Mouse Right Click
-  - Far on the right
-  - to dash through Wall
+  - 'Dash Far on the right '
+  - to go through wall
   mode: 0
   bridge: []
 --- !u!54 &392458443
@@ -14738,6 +14736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc011bce8f6ef24ea13f46ae2720ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shake: 0
 --- !u!1001 &971476357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29220,7 +29219,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20
+  m_MaxValue: 10
   m_WholeNumbers: 1
   m_Value: 10
   m_OnValueChanged:
@@ -29847,7 +29846,14 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'QuickRigCharacter_RightLeg'\n\tTransform 'QuickRigCharacter_RightForeArm'\n\tTransform
+    'QuickRigCharacter_LeftLeg'\n\tTransform 'QuickRigCharacter_LeftForeArm'\n\tTransform
+    'QuickRigCharacter_Neck'\n\tTransform 'QuickRigCharacter_RightLeg'\n\tTransform
+    'QuickRigCharacter_LeftUpLeg'\n\tTransform 'QuickRigCharacter_Hips'\n\tTransform
+    'QuickRigCharacter_RightFoot'\n\tTransform 'QuickRigCharacter_LeftFoot'\n\tand
+    more ...\n\tFrom animation clip 'Jump'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0

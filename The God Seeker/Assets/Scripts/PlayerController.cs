@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
             jumpTime = 1;
             speed = 10;
 
+            anim.SetBool("Jump", false);
             var emission = slowFalling.emission;
             emission.rateOverTime = 0;
         }
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour
             jumpTime = 0;
             speed = 5;
 
+            anim.SetBool("Jump", true);
             var emission = slowFalling.emission;
             emission.rateOverTime = 5;
         }
