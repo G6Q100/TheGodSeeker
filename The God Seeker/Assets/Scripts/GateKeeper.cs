@@ -72,7 +72,7 @@ public class GateKeeper : MonoBehaviour
                 if (phase == 3)
                     ComboAttack();
                 else
-                    ThunderBlastAttack();
+                    ClawAttack();
                 break;
             case 2:
                 FireAttack();
