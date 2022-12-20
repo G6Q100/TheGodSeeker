@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.40452203, g: 0.42588386, b: 0.428737, a: 1}
+  m_IndirectSpecularColor: {r: 0.4045223, g: 0.42588407, b: 0.42873728, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1726181825}
         m_TargetAssemblyTypeName: NextLevel, Assembly-CSharp
         m_MethodName: LoadNext
         m_Mode: 1
@@ -804,7 +804,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: c29b83d2e5753964d97afb7ea249e1e3, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: bd7c5fb040843344395cb3e39c1dd1df, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 87fe6b729705b124f8fb894c2620efb6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6562aa1112573c5429fbe4b15b8d8e2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6077,6 +6077,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1726181825 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6413991734776281356, guid: 8171449f74bdd16478b7d4d123b66819, type: 3}
+  m_PrefabInstance: {fileID: 8494686801944282174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5131f3f649469b446bae1d2a5e89f8c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1741930122
 GameObject:
   m_ObjectHideFlags: 0
@@ -6555,7 +6566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1074301724504298998, guid: 8171449f74bdd16478b7d4d123b66819, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4940257639727490042, guid: 8171449f74bdd16478b7d4d123b66819, type: 3}
       propertyPath: m_Pivot.x

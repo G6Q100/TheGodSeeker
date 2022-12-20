@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6386,9 +6386,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 201608780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7345d11c8485e364a889f6840cb013f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 61d2bbb0146a1e0489f2a87214f027de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 744933661}
 --- !u!4 &214124075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7ff72920fc79a064d895903bd1dd379d, type: 3}
@@ -14234,6 +14235,14 @@ PrefabInstance:
     - target: {fileID: 5414701048184417491, guid: b811cc2a317d1fb48a721f9297108afa, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414701048744668029, guid: b811cc2a317d1fb48a721f9297108afa, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2000707304}
+    - target: {fileID: 5414701048744668029, guid: b811cc2a317d1fb48a721f9297108afa, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VolumeUpdater
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b811cc2a317d1fb48a721f9297108afa, type: 3}
