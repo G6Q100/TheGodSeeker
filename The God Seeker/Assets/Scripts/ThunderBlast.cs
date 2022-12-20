@@ -20,7 +20,8 @@ public class ThunderBlast : MonoBehaviour
             if(animSpace > tempSpace)
             {
                 tempSpace += 0.2f;
-                Instantiate(lightning, transform.position, Quaternion.Euler(0, Random.Range(0, 360), 0));
+                Vector3 spawnPoint = new Vector3(transform.position.x, 0.1f, transform.position.z);
+                Instantiate(lightning, spawnPoint, Quaternion.Euler(0, Random.Range(0, 360), 0));
             }
             return;
         }

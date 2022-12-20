@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GateKeeper : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GateKeeper : MonoBehaviour
     public float targetDist;
     public float smoothSpeed;
 
-    public Transform[] body;
+    public Transform[] body, lightningEffect;
 
     [SerializeField] Transform player;
 
@@ -40,6 +41,8 @@ public class GateKeeper : MonoBehaviour
 
     int fire;
     [SerializeField] GameObject energyBall, centerPoint, thunderBall, thunderShock;
+    [SerializeField] Animator dirLight, hpBar;
+    [SerializeField] Material thunderDragon;
 
     private void Start()
     {
@@ -65,6 +68,9 @@ public class GateKeeper : MonoBehaviour
         changeTime += Time.deltaTime;
         switch (mode)
         {
+            case -1:
+                Phase2Change();
+                break;
             case 0:
                 Follow();
                 break;
@@ -136,17 +142,27 @@ public class GateKeeper : MonoBehaviour
                 lastMode = mode;
             }
 
-            if(GetComponent<HP>().healthPoint <= 140 && phase == 1)
+            if(GetComponent<HP>().healthPoint <= 150 && phase == 1)
             {
                 phase = 2;
                 mode = 5;
                 lastMode = mode;
             }
-            if (GetComponent<HP>().healthPoint <= 70 && phase == 2)
+            if (GetComponent<HP>().healthPoint <= 105 && phase == 2)
             {
                 phase = 3;
-                mode = 6;
-                lastMode = mode;
+                lastMode = 6;
+                mode = -1;
+
+                GetComponent<BoxCollider>().enabled = false;
+                attackHead.GetComponent<BoxCollider>().enabled = false;
+                for (int i = 0; i < body.Length - 1; i++)
+                {
+                    body[i].GetComponent<BoxCollider>().enabled = false;
+                }
+
+                hpBar.SetTrigger("FadeOut");
+                CameraController.instance.player = centerPoint;
             }
 
             if (mode == 2 || mode == 5 || (mode == 3 && phase != 1))
@@ -767,6 +783,75 @@ public class GateKeeper : MonoBehaviour
         }
 
         thunderShock.SetActive(false);
+        changeTime = Random.Range(-2f, 2f);
+    }
+
+    void Phase2Change()
+    {
+        attackSpace += Time.deltaTime;
+
+        if (attackSpace < 2f)
+        {
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 3);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (circling == 0)
+            {
+                circling = 1;
+                CircleRadius = 15;
+                RotationSpeed = 5f;
+                ElevationOffset = 5;
+            }
+
+            CircleMove(centerPoint.transform.position);
+            return;
+        }
+
+        if (attackSpace < 5f)
+        {
+            if (attackSpace > 4 && fire == 0)
+            {
+                fire = 1;
+                dirLight.SetBool("Thunder", true);
+                CameraController.instance.player = player.gameObject;
+            }
+
+            transform.LookAt(centerPoint.transform.position + Vector3.up * 70);
+            rightArm.transform.localPosition = Vector3.Lerp(rightArm.transform.localPosition, rightArmPos,
+             smoothSpeed * 3);
+            leftArm.transform.localPosition = Vector3.Lerp(leftArm.transform.localPosition, leftArmPos,
+                smoothSpeed * 3);
+
+            if (circling == 0)
+            {
+                circling = 1;
+                CircleRadius = 80;
+                RotationSpeed = 1f;
+                ElevationOffset = 30;
+            }
+            CircleMove(centerPoint.transform.position + Vector3.up * 60);
+            return;
+        }
+
+        fire = 0;
+        hpBar.SetTrigger("FadeIn");
+        CameraController.instance.player = player.gameObject;
+        foreach (Transform effect in lightningEffect)
+        {
+            effect.gameObject.SetActive(true);
+        }
+
+        GetComponent<BoxCollider>().enabled = true;
+        attackHead.GetComponent<BoxCollider>().enabled = false;
+        for (int i = 0; i < body.Length - 1; i++)
+        {
+            body[i].GetComponent<BoxCollider>().enabled = true;
+        }
+
+        GetComponent<HP>().normalM = thunderDragon;
         changeTime = Random.Range(-2f, 2f);
     }
 

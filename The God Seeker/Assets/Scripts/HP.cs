@@ -22,7 +22,7 @@ public class HP : MonoBehaviour
     MeshRenderer[] modelPart;
 
     [SerializeField]
-    Material normalM, damagedM;
+    public Material normalM, damagedM;
     [SerializeField]
     Slider hpBar;
 
