@@ -15608,6 +15608,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 21d438c63bc87bf48882459c4c1f97a3, type: 3}
   m_PrefabInstance: {fileID: 2022214387}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1046196817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6521442888486096010, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+  m_PrefabInstance: {fileID: 228565606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1048389023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31182,6 +31187,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7645417880389897899, guid: dec9dbc1914831b4791ddf5d06ed91bf, type: 3}
+      propertyPath: heal
+      value: 
+      objectReference: {fileID: 1046196817}
     - target: {fileID: 7645417880389897899, guid: dec9dbc1914831b4791ddf5d06ed91bf, type: 3}
       propertyPath: hpMode
       value: 4

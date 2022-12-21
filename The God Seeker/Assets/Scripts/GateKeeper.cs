@@ -32,7 +32,7 @@ public class GateKeeper : MonoBehaviour
     float idleTime, changeTime = -3f;
 
     int mode = 0, lastMode = 0, phase = 1;
-    float attackSpace = 0;
+    float attackSpace = 0, tempSpace = 0;
     Vector3 savePos, DefaultRrightArmPos, DefaultLeftArmPos, rightArmPos, leftArmPos, playerPos;
     Quaternion saveRot;
 
@@ -927,7 +927,7 @@ public class GateKeeper : MonoBehaviour
             return;
         }
 
-        if (attackSpace < 0.8f)
+        if (attackSpace < 0.7f)
         {
             if (fire == 0)
             {
@@ -935,105 +935,40 @@ public class GateKeeper : MonoBehaviour
                 transform.LookAt(player.position + Vector3.up * 1.5f);
                 Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
             }
+
+            tempSpace = 0;
             return;
         }
-
-        if (attackSpace < 1.1f)
+        if(attackSpace < 3.5f)
         {
-            fire = 0;
-            circling = 1;
-            CircleRadius = 15;
-            RotationSpeed = 5;
-            CircleMove(player.position);
-            return;
-        }
-
-        if (attackSpace < 1.5f)
-        {
-            if(fire == 0 && attackSpace > 1.3f)
+            if (attackSpace < 0.9f + tempSpace)
             {
-                fire = 1;
-                transform.LookAt(player.position + Vector3.up * 1.5f);
-                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+                fire = 0;
+                circling = 1;
+                CircleRadius = 15;
+                RotationSpeed = 5;
+                CircleMove(player.position);
+                return;
             }
-            return;
-        }
 
-        if (attackSpace < 1.8f)
-        {
-            fire = 0;
-            circling = 1;
-            CircleRadius = 15;
-            RotationSpeed = 5;
-            CircleMove(player.position);
-            return;
-        }
-
-        if (attackSpace < 2.2f)
-        {
-            if (fire == 0 && attackSpace > 2f)
+            if (attackSpace < 1.1f + tempSpace)
             {
-                fire = 1;
-                transform.LookAt(player.position + Vector3.up * 1.5f);
-                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+                if (fire == 0 && attackSpace > 1f + tempSpace)
+                {
+                    fire = 1;
+                    transform.LookAt(player.position + Vector3.up * 1.5f);
+                    Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
+                }
+                return;
             }
-            return;
-        }
-
-        if (attackSpace < 2.5f)
-        {
-            fire = 0;
-            circling = 1;
-            CircleRadius = 15;
-            RotationSpeed = 5;
-            CircleMove(player.position);
-            return;
-        }
-        if (attackSpace < 2.2f)
-        {
-            if (fire == 0 && attackSpace > 2f)
-            {
-                fire = 1;
-                transform.LookAt(player.position + Vector3.up * 1.5f);
-                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
-            }
-            return;
-        }
-
-        if (attackSpace < 2.5f)
-        {
-            fire = 0;
-            circling = 1;
-            CircleRadius = 15;
-            RotationSpeed = 5;
-            CircleMove(player.position);
-            return;
-        }
-
-        if (attackSpace < 2.9f)
-        {
-            if (fire == 0 && attackSpace > 2.7f)
-            {
-                fire = 1;
-                transform.LookAt(player.position + Vector3.up * 1.5f);
-                Instantiate(energyBall, transform.position + transform.forward, transform.rotation);
-            }
-            return;
-        }
-
-        if (attackSpace < 3.3f)
-        {
-            fire = 0;
-            circling = 1;
-            CircleRadius = 15;
-            RotationSpeed = 5;
-            CircleMove(player.position);
+            tempSpace += 0.5f;
             return;
         }
 
         if (attackSpace < 4f)
         {
-            if(fire == 0 && attackSpace > 3.5f)
+            tempSpace = 0;
+            if (fire == 0 && attackSpace > 3.5f)
             {
                 fire = 1;
                 transform.LookAt(player.position + Vector3.up * 1.5f);
