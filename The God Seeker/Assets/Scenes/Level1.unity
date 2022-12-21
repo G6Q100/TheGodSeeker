@@ -154,7 +154,7 @@ Transform:
   m_LocalScale: {x: 1.3685011, y: 1, z: 23.098}
   m_Children: []
   m_Father: {fileID: 1600429918}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9128024
 MonoBehaviour:
@@ -6465,6 +6465,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff72920fc79a064d895903bd1dd379d, type: 3}
+--- !u!1001 &228565606
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1600429918}
+    m_Modifications:
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 91.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521442888486096010, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_Name
+      value: fak
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+--- !u!4 &228565607 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5893806108724057648, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+  m_PrefabInstance: {fileID: 228565606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &228675774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 21d438c63bc87bf48882459c4c1f97a3, type: 3}
@@ -7175,7 +7237,7 @@ Transform:
   m_LocalScale: {x: 10.836329, y: 1, z: 23.098}
   m_Children: []
   m_Father: {fileID: 1600429918}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &392458442
 MonoBehaviour:
@@ -7192,8 +7254,8 @@ MonoBehaviour:
   player1Text: {fileID: 1595244885}
   player2Text: {fileID: 1262491950}
   p1Text:
-  - 
-  - 
+  - Pick up healing
+  - 'to  heal '
   p2Text:
   - 'Dash Far on the right '
   - to go through wall
@@ -24432,6 +24494,7 @@ Transform:
   m_Children:
   - {fileID: 830122725}
   - {fileID: 1952590199}
+  - {fileID: 228565607}
   - {fileID: 392458441}
   - {fileID: 9128023}
   m_Father: {fileID: 0}
@@ -30321,6 +30384,7 @@ MonoBehaviour:
   enemyHitEffect: {fileID: 0}
   tutorial: {fileID: 0}
   tutorial2: {fileID: 0}
+  heal: {fileID: 0}
   boss: {fileID: 0}
   cutscene: {fileID: 0}
   player: {fileID: 6745895085561066278}

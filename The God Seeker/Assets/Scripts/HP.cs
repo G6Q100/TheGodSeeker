@@ -11,7 +11,7 @@ public class HP : MonoBehaviour
     float damageTime, iFrame;
 
     [SerializeField]
-    GameObject normal, damaged, enemyHitEffect, tutorial, tutorial2, boss, cutscene;
+    GameObject normal, damaged, enemyHitEffect, tutorial, tutorial2, heal, boss, cutscene;
 
     [SerializeField]
     SkinnedMeshRenderer player;
@@ -163,6 +163,7 @@ public class HP : MonoBehaviour
                     Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
                     tutorial.SetActive(true);
                     tutorial2.SetActive(true);
+                    heal.SetActive(true);
                     Destroy(gameObject);
                 }
                 break;
