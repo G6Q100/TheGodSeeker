@@ -6520,6 +6520,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fak
       objectReference: {fileID: 0}
+    - target: {fileID: 6521442888486096010, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3825b52aac0ed3149b96715fe92c45b6, type: 3}
 --- !u!4 &228565607 stripped
