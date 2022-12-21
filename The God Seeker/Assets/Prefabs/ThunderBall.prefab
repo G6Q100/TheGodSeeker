@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88aed7b79ecb10c4f8d9d7c4ff945e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightning: {fileID: 5722781613563283806, guid: b5f028431aaa8534db4b1d52ecc08e30, type: 3}
+  lightning: {fileID: 5722781613563283806, guid: 2a9d7acf7d1bd6946bae27fe87723cd6, type: 3}
 --- !u!135 &98628515728523312
 SphereCollider:
   m_ObjectHideFlags: 0
