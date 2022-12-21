@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkyThunder : MonoBehaviour
 {
     float dropSpace = Random.Range(0.35f,0.5f);
+    int randX, randZ;
     [SerializeField] GameObject lightning;
     private void Update()
     {
@@ -12,7 +13,9 @@ public class SkyThunder : MonoBehaviour
         if (dropSpace < 0)
         {
             dropSpace = Random.Range(0.35f, 0.5f);
-            Vector3 spawnPoint = new Vector3(Random.Range(-25, 56), 80, Random.Range(-20, 40));
+            randX = Random.Range(-25, 56);
+            randZ = Random.Range(-20, 40);
+            Vector3 spawnPoint = new Vector3(randX, 80, randZ);
             Instantiate(lightning, spawnPoint, Quaternion.Euler(-90, 0, 0));
         }
     }
