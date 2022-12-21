@@ -105970,6 +105970,7 @@ MonoBehaviour:
   tutorial: {fileID: 0}
   tutorial2: {fileID: 0}
   boss: {fileID: 4730466349970645683}
+  cutscene: {fileID: 1620968983}
   player: {fileID: 0}
   bodyPart: []
   modelPart:
@@ -133220,6 +133221,7 @@ MonoBehaviour:
   tutorial: {fileID: 0}
   tutorial2: {fileID: 0}
   boss: {fileID: 0}
+  cutscene: {fileID: 0}
   player: {fileID: 9185449007618839380}
   bodyPart: []
   modelPart: []

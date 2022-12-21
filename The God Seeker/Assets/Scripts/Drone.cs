@@ -22,7 +22,7 @@ public class Drone : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.position) >= 30)
+        if (Vector3.Distance(transform.position, player.position) >= 25)
             return;
         if (agent.velocity.magnitude <= 0.5f)
                 Attack();
@@ -56,4 +56,5 @@ public class Drone : MonoBehaviour
             bulletCD = 0;
         }
     }
+
 }

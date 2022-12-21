@@ -26,7 +26,7 @@ public class SpiderController : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.position) >= 30)
+        if (Vector3.Distance(transform.position, player.position) >= 20)
             return;
         if (agent.velocity.magnitude <= 0.1f)
                 Attack();
@@ -45,7 +45,7 @@ public class SpiderController : MonoBehaviour
     {
         lastPos = transform.rotation;
 
-        Vector3 playerPos = new Vector3(player.position.x, 1, player.position.z);
+        Vector3 playerPos = new Vector3(player.position.x, transform.position.y, player.position.z);
         agent.SetDestination(playerPos);
 
         transform.LookAt(playerPos);

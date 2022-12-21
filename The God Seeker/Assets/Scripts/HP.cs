@@ -11,7 +11,7 @@ public class HP : MonoBehaviour
     float damageTime, iFrame;
 
     [SerializeField]
-    GameObject normal, damaged, enemyHitEffect, tutorial, tutorial2, boss;
+    GameObject normal, damaged, enemyHitEffect, tutorial, tutorial2, boss, cutscene;
 
     [SerializeField]
     SkinnedMeshRenderer player;
@@ -173,6 +173,7 @@ public class HP : MonoBehaviour
                 if (healthPoint <= 0)
                 {
                     Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
+                    StartCoroutine(cutscene.GetComponent<NextLevel>().LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
                     Destroy(boss);
                 }
                 break;
