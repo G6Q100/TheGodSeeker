@@ -173,7 +173,7 @@ public class HP : MonoBehaviour
                 if (healthPoint <= 0)
                 {
                     Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
-                    StartCoroutine(cutscene.GetComponent<NextLevel>().LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+                    cutscene.GetComponent<NextLevel>().LoadNext();
                     Destroy(boss);
                 }
                 break;

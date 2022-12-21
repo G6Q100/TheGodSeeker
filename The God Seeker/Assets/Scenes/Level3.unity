@@ -51216,7 +51216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2180021134098377841, guid: ec67e4aad0802474faa398d69b438815, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2180021134098377841, guid: ec67e4aad0802474faa398d69b438815, type: 3}
       propertyPath: m_LocalPosition.x
@@ -63455,7 +63455,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 15
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -121754,7 +121754,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2022214387
 PrefabInstance:

@@ -247,6 +247,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 12 + transform.right * 12 + transform.up * 3;
+            savePos.y = 6;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -261,6 +262,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 10 - transform.right * 12 + transform.up * 3;
+            savePos.y = 6;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -280,6 +282,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 8 + transform.right * 12 + transform.up * 5;
+            savePos.y = 9;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -290,6 +293,7 @@ public class GateKeeper : MonoBehaviour
                 smoothSpeed * 3);
 
             savePos = player.position - transform.forward * 6.5f - transform.right * 3 + transform.up * 3;
+            savePos.y = 6;
             fire = 0;
             return;
         }
@@ -463,6 +467,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 12 - transform.right * 12 + transform.up * 3;
+            savePos.y = 6;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -477,6 +482,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 10 + transform.right * 12 + transform.up * 3;
+            savePos.y = 6;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -496,6 +502,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 8 - transform.right * 12 + transform.up * 5;
+            savePos.y = 8;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -506,6 +513,7 @@ public class GateKeeper : MonoBehaviour
                 smoothSpeed * 3);
 
             savePos = player.position - transform.forward * 6.5f + transform.right * 3 + transform.up * 3;
+            savePos.y = 6;
             fire = 0;
             return;
         }
@@ -761,6 +769,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 12 + transform.right * 12 + transform.up * 3;
+            savePos.y = 6;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -775,6 +784,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 10 - transform.right * 12 + transform.up * 3;
+            savePos.y = 6;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 8);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -794,6 +804,7 @@ public class GateKeeper : MonoBehaviour
         {
             transform.rotation = saveRot;
             savePos = player.position - transform.forward * 8 + transform.right * 12 + transform.up * 5;
+            savePos.y = 9;
             transform.position = Vector3.Lerp(transform.position, savePos, smoothSpeed * 5);
             transform.LookAt(player.position + Vector3.up * 3);
 
@@ -804,6 +815,7 @@ public class GateKeeper : MonoBehaviour
                 smoothSpeed * 3);
 
             savePos = player.position - transform.forward * 6.5f - transform.right * 3 + transform.up * 3;
+            savePos.y = 6;
             fire = 0;
             return;
         }

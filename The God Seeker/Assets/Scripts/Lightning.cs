@@ -6,7 +6,7 @@ public class Lightning : MonoBehaviour
 {
     [SerializeField] GameObject lightning, warning;
     float animSpace;
-    [SerializeField] float shake = 0.35f;
+    [SerializeField] float shake = 0.35f, delay;
     int fire = 0;
 
     void Start()
@@ -18,13 +18,13 @@ public class Lightning : MonoBehaviour
     private void Update()
     {
         animSpace += Time.deltaTime;
-        if (animSpace < 0.6f)
+        if (animSpace < 0.6f + delay)
         {
             warning.SetActive(true);
             lightning.SetActive(false);
             return;
         }
-        if (animSpace < 0.9f)
+        if (animSpace < 0.9f + delay)
         {
             if (fire == 0)
             {

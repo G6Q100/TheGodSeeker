@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController characterController;
     Animator anim;
-    int speed = 10, maxGravity = -8;
+    int speed = 10, maxGravity = -10;
 
     [SerializeField] float gravity = 0, attacking = 0;
     [SerializeField]int jumpTime = 1;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
         if (attacking > 0.1f)
         {
-            maxGravity = -8;
+            maxGravity = -10;
             return;
         }
 
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Running", false);
         }
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z, -16, 160));
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -10f, 25f), Mathf.Clamp(transform.position.z, -16, 160));
 
         // Jump
         if (characterController.isGrounded)
