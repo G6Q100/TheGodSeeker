@@ -56,10 +56,8 @@ public class Player2Controller : MonoBehaviour
             transform.position.z >= player1.transform.position.z + 22.5f ||
             transform.position.z <= player1.transform.position.z - 18.5f)
         {
-            agent.enabled = false;
             transform.position = player1.transform.position + Vector3.up;
             popUp.transform.position = transform.position + Vector3.up;
-            agent.enabled = true;
             popUp.SetActive(true);
             agent.SetDestination(transform.position);
             popUp.GetComponent<ParticleSystem>().Play();
