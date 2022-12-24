@@ -37,6 +37,7 @@ public class Player2Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            agent.enabled = true;
             lastStand = transform.position;
 
             RaycastHit hit;
@@ -110,13 +111,13 @@ public class Player2Controller : MonoBehaviour
                 transform.LookAt(hit.point);
                 transform.position += transform.forward * 6;
                 Destroy(Instantiate(dashArea, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
-                agent.enabled = true;
                 agent.SetDestination(transform.position);
             }
         }
 
         if(dashCD > 0)
         {
+            agent.enabled = true;
             dashCD -= Time.deltaTime;
         }
     }

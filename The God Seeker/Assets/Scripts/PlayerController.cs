@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
         // Jump
         if (characterController.isGrounded)
         {
+            lastStand = transform.position;
             gravity = 0;
             jumpTime = 1;
             speed = 10;
@@ -107,10 +108,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(jumpTime > 0)
-            {
-                lastStand = transform.position;
-            }
             jumpTime = 0;
             speed = 5;
 

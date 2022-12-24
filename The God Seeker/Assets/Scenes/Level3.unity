@@ -39168,7 +39168,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1b3ea80f78aec3b4f80bec4485b0ef2f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -69083,19 +69083,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1486969126
-CapsuleCollider:
+--- !u!143 &1486969126
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486969125}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.6
+  serializedVersion: 2
   m_Height: 4
-  m_Direction: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1486969127
 Transform:
@@ -69155,7 +69159,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &1498817235
@@ -105969,6 +105973,7 @@ MonoBehaviour:
   enemyHitEffect: {fileID: 601080054101008228, guid: 2ac4a55ca6df7c544a08e8b39453cc58, type: 3}
   tutorial: {fileID: 0}
   tutorial2: {fileID: 0}
+  heal: {fileID: 0}
   boss: {fileID: 4730466349970645683}
   cutscene: {fileID: 1620968983}
   player: {fileID: 0}
@@ -133220,6 +133225,7 @@ MonoBehaviour:
   enemyHitEffect: {fileID: 0}
   tutorial: {fileID: 0}
   tutorial2: {fileID: 0}
+  heal: {fileID: 0}
   boss: {fileID: 0}
   cutscene: {fileID: 0}
   player: {fileID: 9185449007618839380}

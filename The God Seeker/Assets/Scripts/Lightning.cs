@@ -12,7 +12,7 @@ public class Lightning : MonoBehaviour
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player2");
-        Physics.IgnoreCollision(lightning.GetComponent<BoxCollider>(), player.GetComponent<CapsuleCollider>());
+        Physics.IgnoreCollision(lightning.GetComponent<BoxCollider>(), player.GetComponent<CharacterController>());
     }
 
     private void Update()
