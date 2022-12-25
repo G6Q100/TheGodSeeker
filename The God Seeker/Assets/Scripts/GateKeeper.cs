@@ -53,8 +53,6 @@ public class GateKeeper : MonoBehaviour
         rightArmPos = DefaultRrightArmPos;
         leftArmPos = DefaultLeftArmPos;
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
         lineRenderer.positionCount = length;
         segmentPoses = new Vector3[length];
         segmentV = new Vector3[length];
