@@ -162,7 +162,7 @@ public class HP : MonoBehaviour
                 {
                     Destroy(Instantiate(enemyHitEffect, transform.position, Quaternion.identity), 1);
                     tutorial.SetActive(true);
-                    tutorial2.SetActive(true);
+                    tutorial2.layer = LayerMask.NameToLayer("Ignore Raycast");
                     heal.SetActive(true);
                     Destroy(gameObject);
                 }

@@ -20,13 +20,12 @@ public class Player2Controller : MonoBehaviour
 
     [SerializeField] Transform attackRange;
     [SerializeField] GameObject dashArea;
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Movement();
         Dash();
@@ -42,19 +41,18 @@ public class Player2Controller : MonoBehaviour
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity) && agent.enabled)
             {
                 if (hit.point.z <= -16)
-                    agent.SetDestination(new Vector3(hit.point.x, hit.point.y, -16));
+                    agent.SetDestination(new Vector3(hit.point.x, hit.point.y + 2, -16));
                 else
-                    agent.SetDestination(hit.point);
+                    agent.SetDestination(new Vector3(hit.point.x, hit.point.y + 2, hit.point.z));
             }
         }
 
-        if (transform.position.x >= player1.transform.position.x + 26.5f ||
-            transform.position.x <= player1.transform.position.x - 26.5f ||
-            transform.position.z >= player1.transform.position.z + 22.5f ||
+        if (transform.position.x >= player1.transform.position.x + 32.5f ||
+            transform.position.x <= player1.transform.position.x - 32.5f ||
+            transform.position.z >= player1.transform.position.z + 32.5f ||
             transform.position.z <= player1.transform.position.z - 18.5f)
         {
             transform.position = player1.transform.position + Vector3.up;
@@ -83,9 +81,13 @@ public class Player2Controller : MonoBehaviour
             player1.GetComponent<PlayerController>().Teleported(teleportedPos + Vector3.up);
             transform.position = playerPos;
 
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, Mathf.Infinity))
+            {
+                agent.SetDestination(transform.position - new Vector3(0, hit.distance + 2, 0));
+            }
+
             popUp.transform.position = transform.position;
             popUp.SetActive(true);
-            agent.SetDestination(transform.position);
             popUp.GetComponent<ParticleSystem>().Play();
 
             popUp2.transform.position = playerPos;
@@ -109,8 +111,10 @@ public class Player2Controller : MonoBehaviour
             {
                 agent.enabled = false;
                 transform.LookAt(hit.point);
-                transform.position += transform.forward * 6;
+                transform.position = transform.position + transform.forward * 6;
                 Destroy(Instantiate(dashArea, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
+
+                agent.enabled = true;
                 agent.SetDestination(transform.position);
             }
         }

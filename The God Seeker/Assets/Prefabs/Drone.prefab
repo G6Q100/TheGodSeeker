@@ -456,13 +456,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9734411dabc3f7f4abc2fa42b5c3c02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoint: 15
+  healthPoint: 9
   hpMode: 1
   normal: {fileID: 3640418886541250840}
   damaged: {fileID: 5178925842241466614}
   enemyHitEffect: {fileID: 601080054101008228, guid: 2ac4a55ca6df7c544a08e8b39453cc58, type: 3}
+  tutorial: {fileID: 0}
+  tutorial2: {fileID: 0}
+  heal: {fileID: 0}
+  boss: {fileID: 0}
+  cutscene: {fileID: 0}
   player: {fileID: 0}
   bodyPart: []
+  modelPart: []
   normalM: {fileID: 0}
   damagedM: {fileID: 0}
   hpBar: {fileID: 0}

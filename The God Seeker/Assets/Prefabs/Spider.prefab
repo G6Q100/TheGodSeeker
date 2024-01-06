@@ -1637,11 +1637,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9734411dabc3f7f4abc2fa42b5c3c02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoint: 30
+  healthPoint: 10
   hpMode: 3
   normal: {fileID: 0}
   damaged: {fileID: 0}
   enemyHitEffect: {fileID: 601080054101008228, guid: 2ac4a55ca6df7c544a08e8b39453cc58, type: 3}
+  tutorial: {fileID: 0}
+  tutorial2: {fileID: 0}
+  heal: {fileID: 0}
+  boss: {fileID: 0}
+  cutscene: {fileID: 0}
   player: {fileID: 0}
   bodyPart:
   - {fileID: 3970416419351782803}
@@ -1649,6 +1654,7 @@ MonoBehaviour:
   - {fileID: 6919732308213594989}
   - {fileID: 8629350298289044191}
   - {fileID: 7436905926283027085}
+  modelPart: []
   normalM: {fileID: -876546973899608171, guid: b0a7d265a4bf4274ebb716ad9879270a, type: 3}
   damagedM: {fileID: 2100000, guid: dfc75f3d2e6087246862f5c4420a9a7a, type: 2}
   hpBar: {fileID: 0}
@@ -6568,6 +6574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0886533c51270342b5fdf461c61a0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &7645417881101436568
 GameObject:
   m_ObjectHideFlags: 0

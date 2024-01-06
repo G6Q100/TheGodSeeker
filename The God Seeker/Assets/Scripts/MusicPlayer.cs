@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MusicPlayer : MonoBehaviour
@@ -23,6 +24,14 @@ public class MusicPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            AudioSource.volume = MusicVolume / 2;
+            PlayerPrefs.SetFloat("volume", MusicVolume / 2);
+            return;
+        }    
+
+
         AudioSource.volume = MusicVolume;
         PlayerPrefs.SetFloat("volume", MusicVolume);
     }

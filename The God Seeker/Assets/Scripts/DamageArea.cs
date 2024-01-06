@@ -24,7 +24,6 @@ public class DamageArea : MonoBehaviour
                     player2.SpwanHeal();
                 }
             }
-            Destroy(gameObject);
             return;
         }
         if (other.gameObject.tag == "Segment")
@@ -41,7 +40,6 @@ public class DamageArea : MonoBehaviour
                     player2.SpwanHeal();
                 }
             }
-            Destroy(gameObject);
         }
     }
 }

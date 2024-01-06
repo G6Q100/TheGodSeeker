@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         switch (mode)
         {
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         attacking -= Time.deltaTime;
         if (attacking > 0.3f)
         {
-            maxGravity = -10;
+            maxGravity = -30;
             playerMovement = transform.forward * 10 * Time.deltaTime;
             characterController.Move(playerMovement);
             return;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
         if (attacking > 0.1f)
         {
-            maxGravity = -10;
+            maxGravity = -30;
             return;
         }
 
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        gravity -= 25f * Time.deltaTime;
+        gravity -= 30f * Time.deltaTime;
 
         float v = Input.GetAxis("Horizontal") * speed;
         float h = Input.GetAxis("Vertical") * speed;
@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
             jumpTime = 0;
             speed = 5;
 
-            anim.SetBool("Jump", true);
             var emission = slowFalling.emission;
             emission.rateOverTime = 5;
         }
@@ -120,6 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             attacking = 0.4f;
             anim.SetTrigger("Attack");
+            anim.SetBool("Jump", true);
             Destroy(Instantiate(sword, attackRange.transform.position, attackRange.transform.rotation), 0.3f);
             mode = "attack";
             return;

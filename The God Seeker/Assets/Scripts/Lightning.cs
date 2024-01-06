@@ -6,7 +6,7 @@ public class Lightning : MonoBehaviour
 {
     [SerializeField] GameObject lightning, warning;
     float animSpace;
-    [SerializeField] float shake = 0.35f, delay;
+    [SerializeField] float shake = 0.15f, delay;
     int fire = 0;
 
     void Start()

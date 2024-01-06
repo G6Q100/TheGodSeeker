@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9128023
 Transform:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &9128026
 BoxCollider:
@@ -205,8 +205,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 100, z: 6}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 20, y: 100, z: 6}
+  m_Center: {x: 3.5, y: 0, z: 0}
 --- !u!1 &14259565
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 120820108}
   - component: {fileID: 120820110}
   - component: {fileID: 120820109}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Area1
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -6319,12 +6319,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1366, y: 768}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -7168,7 +7168,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 3
+  m_MaxValue: 2
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -15115,8 +15115,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 30
+  orthographic: 0
   orthographic size: 15
   m_Depth: -1
   m_CullingMask:
@@ -15947,7 +15947,7 @@ GameObject:
   - component: {fileID: 1078539520}
   - component: {fileID: 1078539519}
   - component: {fileID: 1078539518}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Area2
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -30862,6 +30862,10 @@ PrefabInstance:
       value: columnN01
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e7a37d0934d9f3d47ae541b2e9f263e1, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e7a37d0934d9f3d47ae541b2e9f263e1, type: 3}
       propertyPath: m_TagString
       value: Environment
       objectReference: {fileID: 0}
@@ -30892,8 +30896,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.05, z: 0.5}
-  m_Center: {x: 0, y: 0.01, z: 0.05}
+  m_Size: {x: 0.01, y: 0.12963861, z: 0.5}
+  m_Center: {x: 0, y: 0.049819153, z: 0.049999997}
 --- !u!65 &1730595986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30905,8 +30909,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.05, z: 0.5}
-  m_Center: {x: 0, y: 0.01, z: 0.05}
+  m_Size: {x: 0.01, y: 0.13034745, z: 0.5}
+  m_Center: {x: 0, y: 0.05017306, z: 0.049999993}
 --- !u!54 &1730595988
 Rigidbody:
   m_ObjectHideFlags: 0

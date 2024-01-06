@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class SkyThunder : MonoBehaviour
 {
-    float dropSpace = Random.Range(0.35f,0.5f);
+    float dropSpace;
     int randX, randZ;
     [SerializeField] GameObject lightning;
+
+    private void Awake()
+    {
+        dropSpace = Random.Range(0.35f, 0.5f);
+    }
+
     private void Update()
     {
         dropSpace -= Time.deltaTime;
